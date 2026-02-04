@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Gems Explorer</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --pink: #6366F1;
+  --purple: #a855f7;
+  --teal: #14b8a6;
+  --blue: #3b82f6;
+  --amber: #f59e0b;
+  --bg: #0f1117;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --glass: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.1);
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --radius: 14px;
+  --font-display: 'Montserrat', system-ui, sans-serif;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+html { font-size: 15px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Background gradient orbs */
+body::before, body::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+}
+body::before {
+  width: 600px; height: 600px;
+  top: -200px; left: -100px;
+  background: var(--purple);
+}
+body::after {
+  width: 500px; height: 500px;
+  bottom: -150px; right: -100px;
+  background: var(--teal);
+}
+
+/* Layout */
+.app {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 0;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  grid-column: 1 / -1;
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--glass-border);
+  background: rgba(15,17,23,0.8);
+  backdrop-filter: blur(20px);
+}
+.header-gem {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 0 24px rgba(99,102,241,0.3);
+}
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.header-sub {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-left: auto;
+}
+
+/* Sidebar Controls */
+.sidebar {
+  padding: 24px;
+  border-right: 1px solid var(--glass-border);
+  overflow-y: auto;
+  background: rgba(15,17,23,0.5);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.control-group {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  backdrop-filter: blur(8px);
+}
+.control-group h3 {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+/* Gem Preset Buttons */
+.preset-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.preset-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  transition: all 0.2s ease;
+  text-align: left;
+}
+.preset-btn:hover {
+  background: var(--surface-hover);
+  border-color: rgba(255,255,255,0.18);
+}
+.preset-btn.active {
+  border-color: var(--pink);
+  background: rgba(99,102,241,0.08);
+  box-shadow: 0 0 16px rgba(99,102,241,0.12);
+}
+.preset-btn .preset-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.preset-btn .preset-name {
+  font-weight: 600;
+  line-height: 1.3;
+}
+.preset-btn .preset-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Select / Dropdown */
+.control-select {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+}
+.control-select:focus {
+  outline: none;
+  border-color: var(--pink);
+}
+
+/* Slider */
+.slider-row {
+  margin-top: 8px;
+}
+.slider-row label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.slider-row input[type="range"] {
+  width: 100%;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  outline: none;
+}
+.slider-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--pink);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(99,102,241,0.4);
+}
+
+/* Toggle */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.toggle-label {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  cursor: pointer;
+  transition: background 0.25s;
+  flex-shrink: 0;
+}
+.toggle.active {
+  background: var(--pink);
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.25s;
+}
+.toggle.active::after {
+  transform: translateX(20px);
+}
+
+/* Main Preview */
+.main {
+  padding: 28px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Step Flow Banner */
+.flow-banner {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 20px 24px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+}
+.flow-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 8px;
+  transition: opacity 0.3s;
+}
+.flow-step.highlight {
+  opacity: 1;
+}
+.flow-step:not(.highlight) {
+  opacity: 0.4;
+}
+.flow-dot {
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.flow-step.highlight .flow-dot {
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  transform: scale(1.05);
+}
+.flow-dot.purple { background: rgba(168,85,247,0.2); border: 1px solid rgba(168,85,247,0.4); }
+.flow-dot.teal   { background: rgba(20,184,166,0.2); border: 1px solid rgba(20,184,166,0.4); }
+.flow-dot.blue   { background: rgba(59,130,246,0.2); border: 1px solid rgba(59,130,246,0.4); }
+.flow-info h4 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.flow-info p {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+.flow-arrow {
+  color: var(--text-muted);
+  font-size: 20px;
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* Preview Card */
+.preview-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+.preview-card:hover {
+  border-color: rgba(255,255,255,0.15);
+}
+.preview-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--glass-border);
+}
+.preview-header .gem-avatar {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.preview-header h3 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.preview-header .tag {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(99,102,241,0.15);
+  color: var(--pink);
+}
+.preview-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.config-section {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.config-section .config-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.config-section .config-label .dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.config-section .config-text {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+.config-section .config-text em {
+  color: var(--text);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* Knowledge Base Pills */
+.kb-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+.kb-pill {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  background: rgba(20,184,166,0.1);
+  border: 1px solid rgba(20,184,166,0.25);
+  color: var(--teal);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.kb-pill::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+/* Comparison Section */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.comparison-card {
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.comparison-card.before {
+  background: rgba(100,116,139,0.06);
+}
+.comparison-card.after {
+  background: rgba(99,102,241,0.04);
+  border-color: rgba(99,102,241,0.2);
+  box-shadow: 0 0 30px rgba(99,102,241,0.06);
+}
+.comparison-card .comp-header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--glass-border);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.comparison-card.before .comp-header {
+  color: var(--text-muted);
+}
+.comparison-card.after .comp-header {
+  color: var(--pink);
+}
+.comp-header .comp-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+}
+.before .comp-dot { background: var(--text-muted); }
+.after .comp-dot { background: var(--pink); }
+.comp-body {
+  padding: 16px;
+}
+.comp-prompt {
+  font-size: 0.82rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.before .comp-prompt {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-dim);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.after .comp-prompt {
+  background: rgba(99,102,241,0.06);
+  color: var(--text);
+  border: 1px solid rgba(99,102,241,0.12);
+}
+.comp-response {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+.comp-response strong {
+  color: var(--text);
+}
+.comp-response .highlight-line {
+  border-left: 2px solid;
+  padding-left: 10px;
+  margin: 8px 0;
+}
+.before .highlight-line { border-color: var(--text-muted); }
+.after .highlight-line { border-color: var(--pink); }
+
+/* Prompt Output */
+.prompt-output {
+  grid-column: 1 / -1;
+  padding: 16px 32px 20px;
+  border-top: 1px solid var(--glass-border);
+  background: rgba(15,17,23,0.8);
+  backdrop-filter: blur(20px);
+}
+.prompt-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.prompt-bar h4 {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+.prompt-text {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+  max-height: 120px;
+  overflow-y: auto;
+}
+.copy-btn {
+  padding: 8px 18px;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.copy-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--pink);
+}
+.copy-btn.copied {
+  background: rgba(20,184,166,0.15);
+  border-color: var(--teal);
+  color: var(--teal);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    max-height: 40vh;
+  }
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+  .flow-banner {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .flow-arrow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-gem">&#9670;</div>
+    <h1>Custom Gems Explorer</h1>
+    <span class="header-sub">VVUSD Professional Development</span>
+  </div>
+
+  <!-- SIDEBAR CONTROLS -->
+  <div class="sidebar">
+
+    <div class="control-group">
+      <h3>Choose a Gem</h3>
+      <div class="preset-grid" id="preset-grid">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Communication Style</h3>
+      <select class="control-select" id="style-select">
+        <option value="professional">Professional</option>
+        <option value="coaching" selected>Coaching</option>
+        <option value="friendly">Friendly &amp; Approachable</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <h3>Detail Level</h3>
+      <div class="slider-row">
+        <label><span>Concise</span><span id="detail-value">Balanced</span></label>
+        <input type="range" id="detail-slider" min="1" max="3" value="2">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <h3>Compare Mode</h3>
+      <div class="toggle-row">
+        <div class="toggle active" id="compare-toggle"></div>
+        <span class="toggle-label">Show Before vs. After</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAIN PREVIEW -->
+  <div class="main" id="main">
+
+    <!-- Step Flow -->
+    <div class="flow-banner" id="flow-banner">
+      <div class="flow-step highlight" data-step="define">
+        <div class="flow-dot purple">&#127919;</div>
+        <div class="flow-info">
+          <h4 style="color:var(--purple)">Define</h4>
+          <p>Role, purpose, &amp; context</p>
+        </div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step highlight" data-step="train">
+        <div class="flow-dot teal">&#128218;</div>
+        <div class="flow-info">
+          <h4 style="color:var(--teal)">Train</h4>
+          <p>Upload knowledge bases</p>
+        </div>
+      </div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step highlight" data-step="deploy">
+        <div class="flow-dot blue">&#128279;</div>
+        <div class="flow-info">
+          <h4 style="color:var(--blue)">Deploy</h4>
+          <p>Share with your team</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gem Config Preview -->
+    <div class="preview-card" id="config-preview">
+      <!-- filled by JS -->
+    </div>
+
+    <!-- Before / After Comparison -->
+    <div class="comparison" id="comparison">
+      <!-- filled by JS -->
+    </div>
+
+  </div>
+
+  <!-- PROMPT OUTPUT -->
+  <div class="prompt-output">
+    <div class="prompt-bar">
+      <h4>Prompt Output</h4>
+      <div class="prompt-text" id="prompt-text"></div>
+      <button class="copy-btn" id="copy-btn">Copy</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────
+const GEMS = [
+  {
+    id: 'observation',
+    icon: '&#128270;',
+    name: 'Observation Feedback Writer',
+    desc: 'Classroom walkthroughs & coaching',
+    color: 'var(--pink)',
+    bgColor: 'rgba(99,102,241,0.15)',
+    role: 'You are an experienced K-12 instructional leadership coach who helps principals and assistant principals write high-quality classroom observation feedback.',
+    purpose: 'Analyze observation notes and evidence, then draft actionable, growth-oriented feedback aligned to our evaluation framework. Provide both commendations and recommendations.',
+    context: 'Our district uses the Danielson Framework for Teaching. SPSA Priority 1 is improving ELA outcomes for English Learner students. We value strengths-based, coaching-oriented feedback.',
+    kb: ['Danielson Framework Rubric', 'SPSA Goals Document', 'District Feedback Templates', 'Site Instructional Focus Areas'],
+    beforePrompt: 'Write feedback for a teacher I observed today.',
+    beforeResponse: 'Here is some general feedback you could provide:\n\n<strong>Strengths:</strong> The teacher showed good classroom management.\n\n<strong>Areas for Growth:</strong> Consider differentiating instruction more.\n\nThis is a very surface-level response with no specifics about frameworks, evidence, or district priorities.',
+    afterPrompt: 'I observed Ms. Ramirez\u2019s 3rd grade ELA block. Students were in small groups working on summarizing. I noticed strong group norms but some EL students were disengaged during independent work time.',
+    afterResponse: '<strong>Commendation (3b: Questioning & Discussion):</strong>\n\n"Your small-group structure showed intentional planning. Students referenced anchor charts and used academic language during peer discussions."\n\n<strong>Recommendation (3e: Flexibility & Responsiveness):</strong>\n\n"Consider adding a scaffolded sentence frame or word bank for EL students during independent summarizing, aligned to our SPSA Priority 1 for ELA outcomes among English Learners."'
+  },
+  {
+    id: 'spsa',
+    icon: '&#128202;',
+    name: 'SPSA / Site Plan Analyst',
+    desc: 'Goals, metrics & compliance',
+    color: 'var(--purple)',
+    bgColor: 'rgba(168,85,247,0.15)',
+    role: 'You are a seasoned K-12 strategic planning advisor with deep expertise in SPSA development, site plan alignment, and LCFF compliance.',
+    purpose: 'Help administrators analyze their SPSA goals and site plan actions, identify misalignments, suggest metric improvements, and draft revision language that meets state requirements.',
+    context: 'We are a Title I district with 78% unduplicated pupils. Our three SPSA priorities are: (1) ELA outcomes for EL students, (2) chronic absenteeism reduction, (3) expanding CTE pathways. Budget transparency is critical.',
+    kb: ['Current SPSA Document', 'Site Plan 2024-25', 'LCFF Funding Summary', 'CA Dashboard Data', 'State SPSA Template'],
+    beforePrompt: 'Help me improve my SPSA goal 1.',
+    beforeResponse: 'Here are some general tips for writing SPSA goals:\n\n<strong>1.</strong> Be specific about outcomes\n<strong>2.</strong> Include measurable metrics\n<strong>3.</strong> Align to state priorities\n\nThis gives no context about your district, current data, or what Goal 1 actually says.',
+    afterPrompt: 'Our SPSA Goal 1 says "Improve ELA proficiency for all students." Our EL reclassification rate dropped 4% last year. What should we revise?',
+    afterResponse: '<strong>Issue Identified:</strong> Goal 1 lacks specificity for the unduplicated pupil subgroup required by LCFF.\n\n<strong>Suggested Revision:</strong>\n"Increase ELA proficiency for English Learners by 8% as measured by SBAC, and raise EL reclassification rates by 5% by June 2026."\n\n<strong>Aligned Action:</strong> Your site plan\u2019s designated ELD coaching hours (Action 1.3) directly support this. Consider adding a mid-year ELPAC progress checkpoint to track leading indicators.'
+  },
+  {
+    id: 'pd',
+    icon: '&#127891;',
+    name: 'PD Designer',
+    desc: 'Professional learning sessions',
+    color: 'var(--teal)',
+    bgColor: 'rgba(20,184,166,0.15)',
+    role: 'You are an expert professional development facilitator and instructional designer specializing in K-12 adult learning.',
+    purpose: 'Design engaging, research-based PD sessions with clear objectives, interactive activities, and actionable takeaways that connect to our district\u2019s instructional priorities.',
+    context: 'Our PD sessions are 90 minutes. Audience is primarily teachers with 5-20 years experience. District focus: standards-aligned instruction, formative assessment, and UDL. We prefer collaborative, low-lecture formats.',
+    kb: ['PD Calendar 2024-25', 'District Instructional Priorities', 'UDL Guidelines', 'Previous Session Evaluations', 'Staff Survey Results'],
+    beforePrompt: 'Plan a PD session on formative assessment.',
+    beforeResponse: '<strong>Session: Formative Assessment</strong>\n\n<strong>Agenda:</strong>\n1. Welcome (5 min)\n2. Presentation on formative assessment (40 min)\n3. Group activity (20 min)\n4. Wrap-up (15 min)\n\nGeneric agenda with a heavy lecture block. No connection to your district priorities or teacher needs.',
+    afterPrompt: 'Design a 90-minute PD on formative assessment for our secondary ELA team. Their survey said they want more strategies for checking understanding during lessons.',
+    afterResponse: '<strong>Session: "Checking for Understanding in Real Time"</strong>\n<strong>Aligned to:</strong> District Priority 2 \u2013 Formative Assessment\n\n<strong>Opening Hook (10 min):</strong> Teachers experience a micro-lesson where YOU model 3 CFU strategies on them.\n\n<strong>Collaborative Exploration (25 min):</strong> Table groups analyze video clips of CFU in action, score using our observation rubric Domain 3d.\n\n<strong>Practice Lab (30 min):</strong> Pairs plan a 5-minute lesson segment embedding one new CFU strategy. Rehearse and get peer feedback.\n\n<strong>Action Planning (15 min):</strong> Each teacher commits to trying one strategy this week and posts to shared Padlet.\n\n<strong>Closing + Exit Ticket (10 min):</strong> "What\u2019s one thing you\u2019ll try Monday?"'
+  },
+  {
+    id: 'comms',
+    icon: '&#9993;',
+    name: 'Communication Drafter',
+    desc: 'Emails, newsletters & memos',
+    color: 'var(--blue)',
+    bgColor: 'rgba(59,130,246,0.15)',
+    role: 'You are a skilled K-12 communications specialist who helps administrators draft clear, empathetic, and professional written communications.',
+    purpose: 'Draft parent communications, staff memos, board updates, and community newsletters that match our district\u2019s voice and comply with translation and accessibility requirements.',
+    context: 'Our community is 82% Latino, many families are Spanish-speaking. All parent communications must be translated. We value a warm, transparent, community-first tone. Superintendent prefers brevity.',
+    kb: ['District Style Guide', 'Translation Guidelines', 'Previous Newsletter Templates', 'Board Communication Protocols', 'Community Demographics Report'],
+    beforePrompt: 'Write a parent email about the new attendance policy.',
+    beforeResponse: 'Dear Parents,\n\nWe are writing to inform you of changes to our attendance policy. Students who miss more than 10% of school days will be considered chronically absent. Please ensure your child attends school regularly.\n\nThank you,\nAdministration\n\nCold, compliance-focused language with no warmth or community voice.',
+    afterPrompt: 'Draft a parent email about our new attendance support program. We want to emphasize partnership, not punishment. This connects to SPSA Goal 2 on chronic absenteeism.',
+    afterResponse: '<strong>Subject:</strong> We\u2019re Here to Help: New Attendance Support for Your Family\n\nDear [School] Families,\n\nWe know that life happens \u2013 illness, transportation, family responsibilities. We also know that every day your child is in school matters for their success.\n\nThat\u2019s why we\u2019re launching our <strong>Attendance Partnership Program</strong>:\n\n\u2022 <strong>Personalized check-ins</strong> if your child misses 3+ days\n\u2022 <strong>Resource connections</strong> for transportation, health, and childcare\n\u2022 <strong>Celebration program</strong> for improved attendance\n\nThis isn\u2019t about consequences \u2013 it\u2019s about making sure every student and family has what they need.\n\nQuestions? Call us at [number] or reply to this email. <em>Disponible en espa\u00f1ol.</em>\n\nWith gratitude,\n[Principal Name]'
+  },
+  {
+    id: 'budget',
+    icon: '&#128176;',
+    name: 'Budget Analyst',
+    desc: 'LCFF, Title I & site budgets',
+    color: 'var(--amber)',
+    bgColor: 'rgba(245,158,11,0.15)',
+    role: 'You are a K-12 fiscal services expert with deep knowledge of LCFF, Title I, Title III, and categorical funding in California public schools.',
+    purpose: 'Help administrators analyze budget allocations, identify allowable expenditures, optimize resource alignment to SPSA goals, and prepare budget justification narratives.',
+    context: 'We receive $4.2M in supplemental/concentration grants. Title I allocation is $1.8M. We are in Year 2 of a 3-year technology bond. The board requires expenditure justifications tied directly to SPSA actions.',
+    kb: ['LCFF Budget Overview', 'Title I Plan', 'Site Budget Worksheets', 'SPSA Actions & Expenditures', 'Categorical Funding Guide', 'Bond Measure Details'],
+    beforePrompt: 'Can I use Title I money to buy Chromebooks?',
+    beforeResponse: 'Yes, you can generally use Title I funds for technology purchases if they support instruction.\n\nGeneric answer that could lead to compliance issues. No mention of your specific funding sources or requirements.',
+    afterPrompt: 'I want to purchase 120 Chromebooks for our EL newcomer program. What funding source is best, and how do I write the justification?',
+    afterResponse: '<strong>Recommended Funding Source:</strong> Title III (EL-specific) for 80 units, supplemental/concentration for remaining 40.\n\n<strong>Why not Title I?</strong> Your Title I plan already allocates technology funds to the intervention lab (Action 2.4). Using Title I here would require a plan amendment.\n\n<strong>Why not Bond funds?</strong> The technology bond covers infrastructure (carts, networking), not devices for specific programs.\n\n<strong>Draft Justification:</strong>\n"120 Chromebooks for the EL Newcomer Academy (SPSA Action 1.5) to provide designated ELD instruction via Ellevation and Newsela platforms. Directly supports SPSA Goal 1: improving ELA outcomes for English Learners. Cost: $36,000 (Title III: $24,000 / S&C: $12,000)."'
+  }
+];
+
+const DETAIL_LABELS = { 1: 'Concise', 2: 'Balanced', 3: 'Detailed' };
+const STYLE_LABELS = { professional: 'Professional', coaching: 'Coaching', friendly: 'Friendly & Approachable' };
+
+// ── STATE ─────────────────────────────────────────────────
+const state = {
+  gem: 'observation',
+  style: 'coaching',
+  detail: 2,
+  showComparison: true
+};
+
+// ── DOM REFS ──────────────────────────────────────────────
+const presetGrid = document.getElementById('preset-grid');
+const styleSelect = document.getElementById('style-select');
+const detailSlider = document.getElementById('detail-slider');
+const detailValue = document.getElementById('detail-value');
+const compareToggle = document.getElementById('compare-toggle');
+const mainEl = document.getElementById('main');
+const configPreview = document.getElementById('config-preview');
+const comparisonEl = document.getElementById('comparison');
+const promptText = document.getElementById('prompt-text');
+const copyBtn = document.getElementById('copy-btn');
+const flowBanner = document.getElementById('flow-banner');
+
+// ── INIT PRESETS ──────────────────────────────────────────
+GEMS.forEach(g => {
+  const btn = document.createElement('button');
+  btn.className = 'preset-btn' + (g.id === state.gem ? ' active' : '');
+  btn.dataset.id = g.id;
+  btn.innerHTML = `
+    <div class="preset-icon" style="background:${g.bgColor}">${g.icon}</div>
+    <div>
+      <div class="preset-name">${g.name}</div>
+      <div class="preset-desc">${g.desc}</div>
+    </div>
+  `;
+  btn.addEventListener('click', () => {
+    state.gem = g.id;
+    updateAll();
+  });
+  presetGrid.appendChild(btn);
+});
+
+// ── EVENTS ────────────────────────────────────────────────
+styleSelect.addEventListener('change', () => {
+  state.style = styleSelect.value;
+  updateAll();
+});
+
+detailSlider.addEventListener('input', () => {
+  state.detail = parseInt(detailSlider.value);
+  updateAll();
+});
+
+compareToggle.addEventListener('click', () => {
+  state.showComparison = !state.showComparison;
+  compareToggle.classList.toggle('active', state.showComparison);
+  updateAll();
+});
+
+copyBtn.addEventListener('click', () => {
+  navigator.clipboard.writeText(promptText.textContent).then(() => {
+    copyBtn.textContent = 'Copied!';
+    copyBtn.classList.add('copied');
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy';
+      copyBtn.classList.remove('copied');
+    }, 1800);
+  });
+});
+
+// ── RENDER ────────────────────────────────────────────────
+function getGem() {
+  return GEMS.find(g => g.id === state.gem);
+}
+
+function renderPresets() {
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.id === state.gem);
+  });
+}
+
+function renderFlowBanner() {
+  // All steps highlight when viewing a full gem config
+  document.querySelectorAll('.flow-step').forEach(s => s.classList.add('highlight'));
+}
+
+function renderConfigPreview() {
+  const g = getGem();
+  const styleName = STYLE_LABELS[state.style];
+  const detailName = DETAIL_LABELS[state.detail];
+
+  let contextExtra = '';
+  if (state.style === 'coaching') {
+    contextExtra = ' Use a coaching stance\u2014ask reflective questions before giving direct answers.';
+  } else if (state.style === 'friendly') {
+    contextExtra = ' Use a warm, approachable tone. Avoid jargon. Write as if talking to a colleague over coffee.';
+  } else {
+    contextExtra = ' Maintain a formal, professional tone suitable for board presentations and official documents.';
+  }
+
+  let detailExtra = '';
+  if (state.detail === 1) detailExtra = ' Keep responses concise\u2014bullet points preferred, no more than 150 words.';
+  else if (state.detail === 3) detailExtra = ' Provide thorough, detailed responses with examples, citations, and step-by-step breakdowns.';
+
+  configPreview.innerHTML = `
+    <div class="preview-header">
+      <div class="gem-avatar" style="background:${g.bgColor}">${g.icon}</div>
+      <h3>${g.name}</h3>
+      <span class="tag">Custom Gem</span>
+    </div>
+    <div class="preview-body">
+      <div class="config-section">
+        <div class="config-label" style="color:var(--pink)"><span class="dot" style="background:var(--pink)"></span> Role</div>
+        <div class="config-text">${g.role}</div>
+      </div>
+      <div class="config-section">
+        <div class="config-label" style="color:var(--purple)"><span class="dot" style="background:var(--purple)"></span> Purpose</div>
+        <div class="config-text">${g.purpose}</div>
+      </div>
+      <div class="config-section">
+        <div class="config-label" style="color:var(--teal)"><span class="dot" style="background:var(--teal)"></span> Context &amp; Style <em style="font-weight:400;color:var(--text-muted);font-size:0.75rem;margin-left:6px;">${styleName} \u00b7 ${detailName}</em></div>
+        <div class="config-text">${g.context}${contextExtra}${detailExtra}</div>
+      </div>
+      <div class="config-section">
+        <div class="config-label" style="color:var(--blue)"><span class="dot" style="background:var(--blue)"></span> Knowledge Base</div>
+        <div class="kb-pills">
+          ${g.kb.map(k => `<span class="kb-pill">${k}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderComparison() {
+  const g = getGem();
+  if (!state.showComparison) {
+    comparisonEl.style.display = 'none';
+    return;
+  }
+  comparisonEl.style.display = 'grid';
+  comparisonEl.innerHTML = `
+    <div class="comparison-card before">
+      <div class="comp-header"><span class="comp-dot"></span> Before &mdash; Generic AI</div>
+      <div class="comp-body">
+        <div class="comp-prompt">&ldquo;${g.beforePrompt}&rdquo;</div>
+        <div class="comp-response">${formatResponse(g.beforeResponse)}</div>
+      </div>
+    </div>
+    <div class="comparison-card after">
+      <div class="comp-header"><span class="comp-dot"></span> After &mdash; Custom Gem</div>
+      <div class="comp-body">
+        <div class="comp-prompt">&ldquo;${g.afterPrompt}&rdquo;</div>
+        <div class="comp-response">${formatResponse(g.afterResponse)}</div>
+      </div>
+    </div>
+  `;
+}
+
+function formatResponse(text) {
+  return text
+    .split('\n\n')
+    .map(p => {
+      if (p.startsWith('"') || p.startsWith('\u201c')) {
+        return `<div class="highlight-line">${p}</div>`;
+      }
+      return `<p style="margin-bottom:8px">${p}</p>`;
+    })
+    .join('');
+}
+
+function updatePrompt() {
+  const g = getGem();
+  const parts = [];
+
+  parts.push(`Create a Custom Gem called "${g.name}" in Google Gemini.`);
+  parts.push(`Set the role to: "${g.role}"`);
+  parts.push(`The purpose is to ${g.purpose.charAt(0).toLowerCase() + g.purpose.slice(1)}`);
+  parts.push(`Key context: ${g.context}`);
+
+  if (state.style !== 'coaching') {
+    parts.push(`Use a ${STYLE_LABELS[state.style].toLowerCase()} communication style.`);
+  }
+  if (state.detail === 1) {
+    parts.push('Keep responses concise and use bullet points.');
+  } else if (state.detail === 3) {
+    parts.push('Provide detailed responses with examples and step-by-step breakdowns.');
+  }
+
+  parts.push(`Upload these knowledge base documents: ${g.kb.join(', ')}.`);
+
+  promptText.textContent = parts.join(' ');
+}
+
+function updateAll() {
+  renderPresets();
+  renderFlowBanner();
+  renderConfigPreview();
+  renderComparison();
+  updatePrompt();
+}
+
+// ── KICK OFF ──────────────────────────────────────────────
+updateAll();
+</script>
+
+</body>
+</html>

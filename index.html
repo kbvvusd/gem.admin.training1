@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Gems Workshop | VVUSD AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.294.0/dist/umd/lucide.min.js"></script>
+
+    <!-- Project CSS -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/gems-module.css">
+
+</head>
+<body class="gems-module">
+    <!-- Landing Background Effects -->
+    <div class="landing-bg">
+        <div class="landing-grid"></div>
+        <div class="landing-orb landing-orb--purple" id="orb-purple"></div>
+        <div class="landing-orb landing-orb--blue" id="orb-blue"></div>
+        <div class="landing-orb landing-orb--teal" id="orb-teal"></div>
+        <div class="landing-particles" id="particles-container"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-text">VVUSD</span>
+            <span class="logo-divider"></span>
+            <span class="logo-subtitle">Custom Gems Workshop</span>
+        </div>
+        <div class="header-right">
+            <span class="slide-counter" id="slideCounter">1 / 4</span>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode" title="Toggle light/dark mode">
+                <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+        <div class="header-progress">
+            <div class="header-progress-bar" id="progressBar"></div>
+        </div>
+    </header>
+
+    <div class="slide-container">
+
+        <!-- ==================== SLIDE 1: WHAT ARE CUSTOM GEMS? ==================== -->
+        <div class="slide active" id="slide-1">
+            <p class="text-label slide-animate" style="animation-delay: 0s;">The Big Idea</p>
+            <h2 class="text-section slide-animate" style="animation-delay: 0.1s;">What Are <span class="accent">Custom Gems?</span></h2>
+            <p class="text-body-lg slide-animate" style="max-width: 900px; animation-delay: 0.2s;">Gems are personalized AI assistants you build once and use forever &mdash; tuned to your exact role, context, and priorities. Think of it like this:</p>
+
+            <!-- Before / After Comparison -->
+            <div class="gem-compare slide-animate" style="animation-delay: 0.35s;">
+                <div class="gem-compare-side gem-compare--before">
+                    <div class="gem-compare-icon gem-compare-icon--before">
+                        <i data-lucide="message-circle" style="width: 32px; height: 32px; color: var(--text-muted);"></i>
+                    </div>
+                    <div class="gem-compare-label gem-compare-label--before">Without a Gem</div>
+                    <div class="gem-compare-text">You re-explain your role, your school, and your priorities <em>every single time</em> you use AI.</div>
+                    <div class="gem-compare-example">"I'm a principal at an elementary school. We use the Danielson Framework. Our SPSA goals focus on..."</div>
+                </div>
+
+                <div class="gem-compare-divider">
+                    <div class="gem-compare-arrow">
+                        <i data-lucide="arrow-right" style="width: 24px; height: 24px;"></i>
+                    </div>
+                </div>
+
+                <div class="gem-compare-side gem-compare--after">
+                    <div class="gem-compare-icon gem-compare-icon--after">
+                        <i data-lucide="gem" style="width: 32px; height: 32px; color: var(--pink-400);"></i>
+                    </div>
+                    <div class="gem-compare-label gem-compare-label--after">With a Gem</div>
+                    <div class="gem-compare-text">Your AI assistant <em>already knows</em> your SPSA goals, your evaluation framework, and your communication style.</div>
+                    <div class="gem-compare-example">"Draft feedback for Mrs. Lopez's observation today."</div>
+                </div>
+            </div>
+
+            <div class="gem-benefits-strip">
+                <div class="gem-benefit-card gem-benefit--purple">
+                    <span class="gem-benefit-label">Consistent</span>
+                    <span class="gem-benefit-desc">Same aligned AI for every team member</span>
+                </div>
+                <div class="gem-benefit-card gem-benefit--blue">
+                    <span class="gem-benefit-label">Shareable</span>
+                    <span class="gem-benefit-desc">One Gem per site or department</span>
+                </div>
+                <div class="gem-benefit-card gem-benefit--amber">
+                    <span class="gem-benefit-label">Updatable</span>
+                    <span class="gem-benefit-desc">Edit anytime as priorities shift</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 2: HOW GEMS WORK ==================== -->
+        <div class="slide" id="slide-2">
+            <p class="text-label slide-animate" style="animation-delay: 0s;">How It Works</p>
+            <h2 class="text-section slide-animate" style="animation-delay: 0.1s;">Build a Gem in <span class="accent">3 Steps</span></h2>
+            <p class="text-body-lg slide-animate" style="max-width: 900px; animation-delay: 0.2s;">Define its purpose, knowledge base, and share it with your users.</p>
+
+            <!-- 3-Step Flow -->
+            <div class="glass-card glass-card--highlight gem-flow-container slide-animate" style="animation-delay: 0.35s;">
+                <div class="gem-flow">
+                    <!-- Step 1: Define -->
+                    <div class="gem-flow-step">
+                        <div class="gem-flow-icon" style="background: rgba(168, 85, 247, 0.2); border-color: rgba(168, 85, 247, 0.4);">
+                            <i data-lucide="target" style="color: var(--purple-400);"></i>
+                        </div>
+                        <div class="gem-flow-arrow">
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                        <div class="gem-flow-content">
+                            <div class="gem-flow-label" style="color: var(--purple-400);">
+                                <i data-lucide="target"></i>
+                                Define
+                            </div>
+                            <p class="gem-flow-desc">Set the role, purpose, and context for your AI assistant</p>
+                            <div class="gem-flow-example">"You are an instructional leadership coach who helps principals write observation feedback..."</div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Train -->
+                    <div class="gem-flow-step">
+                        <div class="gem-flow-icon" style="background: rgba(20, 184, 166, 0.2); border-color: rgba(20, 184, 166, 0.4);">
+                            <i data-lucide="database" style="color: var(--teal-400);"></i>
+                        </div>
+                        <div class="gem-flow-arrow">
+                            <i data-lucide="arrow-right"></i>
+                        </div>
+                        <div class="gem-flow-content">
+                            <div class="gem-flow-label" style="color: var(--teal-400);">
+                                <i data-lucide="database"></i>
+                                Train
+                            </div>
+                            <p class="gem-flow-desc">Upload knowledge bases: policies, plans, frameworks</p>
+                            <div class="gem-flow-files">
+                                <div class="gem-flow-file gem-flow-file--1">
+                                    <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
+                                    <span>SPSA.pdf</span>
+                                </div>
+                                <div class="gem-flow-file gem-flow-file--2">
+                                    <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
+                                    <span>Site Plan.pdf</span>
+                                </div>
+                                <div class="gem-flow-file gem-flow-file--3">
+                                    <i data-lucide="file-text" style="width: 14px; height: 14px;"></i>
+                                    <span>SPSA Rubric.xlsx</span>
+                                </div>
+                                <div class="gem-flow-upload-target">
+                                    <i data-lucide="upload" style="width: 16px; height: 16px;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Deploy -->
+                    <div class="gem-flow-step">
+                        <div class="gem-flow-icon" style="background: rgba(59, 130, 246, 0.2); border-color: rgba(59, 130, 246, 0.4);">
+                            <i data-lucide="share-2" style="color: var(--blue-400);"></i>
+                        </div>
+                        <div class="gem-flow-content">
+                            <div class="gem-flow-label" style="color: var(--blue-400);">
+                                <i data-lucide="share-2"></i>
+                                Deploy
+                            </div>
+                            <p class="gem-flow-desc">Share with your team &mdash; everyone gets the same expert assistant</p>
+                            <div class="gem-flow-network">
+                                <svg viewBox="0 0 220 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <!-- Connection lines (behind nodes) -->
+                                    <line class="net-line net-line--1" x1="110" y1="60" x2="40" y2="24" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+                                    <line class="net-line net-line--2" x1="110" y1="60" x2="180" y2="24" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+                                    <line class="net-line net-line--3" x1="110" y1="60" x2="30" y2="96" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+                                    <line class="net-line net-line--4" x1="110" y1="60" x2="190" y2="96" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+                                    <line class="net-line net-line--5" x1="110" y1="60" x2="110" y2="8" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+                                    <!-- Pulse dots traveling along lines -->
+                                    <circle class="net-pulse net-pulse--1" r="2.5" fill="var(--blue-400)">
+                                        <animateMotion dur="2s" repeatCount="indefinite" begin="0.8s" keyTimes="0;1" keySplines="0.4 0 0.2 1" calcMode="spline"><mpath href="#netpath1"/></animateMotion>
+                                    </circle>
+                                    <circle class="net-pulse net-pulse--2" r="2.5" fill="var(--blue-400)">
+                                        <animateMotion dur="2s" repeatCount="indefinite" begin="1.2s" keyTimes="0;1" keySplines="0.4 0 0.2 1" calcMode="spline"><mpath href="#netpath2"/></animateMotion>
+                                    </circle>
+                                    <circle class="net-pulse net-pulse--3" r="2.5" fill="var(--blue-400)">
+                                        <animateMotion dur="2s" repeatCount="indefinite" begin="1.6s" keyTimes="0;1" keySplines="0.4 0 0.2 1" calcMode="spline"><mpath href="#netpath3"/></animateMotion>
+                                    </circle>
+                                    <circle class="net-pulse net-pulse--4" r="2.5" fill="var(--blue-400)">
+                                        <animateMotion dur="2s" repeatCount="indefinite" begin="2.0s" keyTimes="0;1" keySplines="0.4 0 0.2 1" calcMode="spline"><mpath href="#netpath4"/></animateMotion>
+                                    </circle>
+                                    <circle class="net-pulse net-pulse--5" r="2.5" fill="var(--blue-400)">
+                                        <animateMotion dur="2s" repeatCount="indefinite" begin="1.0s" keyTimes="0;1" keySplines="0.4 0 0.2 1" calcMode="spline"><mpath href="#netpath5"/></animateMotion>
+                                    </circle>
+                                    <!-- Hidden motion paths -->
+                                    <path id="netpath1" d="M110,60 L40,24" fill="none"/>
+                                    <path id="netpath2" d="M110,60 L180,24" fill="none"/>
+                                    <path id="netpath3" d="M110,60 L30,96" fill="none"/>
+                                    <path id="netpath4" d="M110,60 L190,96" fill="none"/>
+                                    <path id="netpath5" d="M110,60 L110,8" fill="none"/>
+                                    <!-- Center Gem node -->
+                                    <circle cx="110" cy="60" r="18" fill="rgba(59,130,246,0.15)" stroke="var(--blue-400)" stroke-width="1.5" class="net-center"/>
+                                    <g transform="translate(99, 49) scale(0.917)" fill="none" stroke="var(--blue-400)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 3h12l4 6-10 13L2 9Z"/>
+                                        <path d="M11 3 8 9l4 13 4-13-3-6"/>
+                                        <path d="M2 9h20"/>
+                                    </g>
+                                    <!-- User nodes -->
+                                    <circle class="net-node net-node--1" cx="40" cy="24" r="10" fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.4)" stroke-width="1"/>
+                                    <circle class="net-node net-node--1i" cx="40" cy="24" r="4" fill="rgba(59,130,246,0.5)"/>
+                                    <circle class="net-node net-node--2" cx="180" cy="24" r="10" fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.4)" stroke-width="1"/>
+                                    <circle class="net-node net-node--2i" cx="180" cy="24" r="4" fill="rgba(59,130,246,0.5)"/>
+                                    <circle class="net-node net-node--3" cx="30" cy="96" r="10" fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.4)" stroke-width="1"/>
+                                    <circle class="net-node net-node--3i" cx="30" cy="96" r="4" fill="rgba(59,130,246,0.5)"/>
+                                    <circle class="net-node net-node--4" cx="190" cy="96" r="10" fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.4)" stroke-width="1"/>
+                                    <circle class="net-node net-node--4i" cx="190" cy="96" r="4" fill="rgba(59,130,246,0.5)"/>
+                                    <circle class="net-node net-node--5" cx="110" cy="8" r="10" fill="rgba(59,130,246,0.1)" stroke="rgba(59,130,246,0.4)" stroke-width="1"/>
+                                    <circle class="net-node net-node--5i" cx="110" cy="8" r="4" fill="rgba(59,130,246,0.5)"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== SLIDE 3: ANATOMY OF A GREAT GEM ==================== -->
+        <div class="slide" id="slide-3">
+
+            <!-- Fixed Nav Dots (right side) -->
+            <nav class="gem-tl-nav" id="gemTimelineNav" aria-label="Gem elements navigation">
+                <a href="#gem-hero" class="gem-tl-nav-dot active" data-gem-section="gem-hero" style="--dot-color: var(--pink-400); --dot-glow: var(--pink-glow);"><span class="gem-tl-nav-label">Intro</span></a>
+                <a href="#gem-role" class="gem-tl-nav-dot" data-gem-section="gem-role" style="--dot-color: var(--pink-400); --dot-glow: var(--pink-glow);"><span class="gem-tl-nav-label">Role</span></a>
+                <a href="#gem-purpose" class="gem-tl-nav-dot" data-gem-section="gem-purpose" style="--dot-color: var(--teal-400); --dot-glow: var(--teal-glow);"><span class="gem-tl-nav-label">Purpose</span></a>
+                <a href="#gem-knowledge" class="gem-tl-nav-dot" data-gem-section="gem-knowledge" style="--dot-color: var(--blue-400); --dot-glow: var(--blue-glow);"><span class="gem-tl-nav-label">Knowledge</span></a>
+                <a href="#gem-context" class="gem-tl-nav-dot" data-gem-section="gem-context" style="--dot-color: var(--purple-400); --dot-glow: var(--purple-glow);"><span class="gem-tl-nav-label">Context</span></a>
+                <a href="#gem-tone" class="gem-tl-nav-dot" data-gem-section="gem-tone" style="--dot-color: var(--amber-500); --dot-glow: var(--amber-glow);"><span class="gem-tl-nav-label">Tone</span></a>
+                <a href="#gem-questions" class="gem-tl-nav-dot" data-gem-section="gem-questions" style="--dot-color: var(--green-400); --dot-glow: var(--green-glow);"><span class="gem-tl-nav-label">Questions</span></a>
+                <a href="#gem-outro" class="gem-tl-nav-dot" data-gem-section="gem-outro" style="--dot-color: var(--teal-400); --dot-glow: var(--teal-glow);"><span class="gem-tl-nav-label">Your Gem</span></a>
+            </nav>
+
+            <!-- Fixed Timeline Line (left side) -->
+            <div class="gem-tl-line" id="gemTimelineLine" aria-hidden="true">
+                <div class="gem-tl-line-fill" id="gemTimelineFill"></div>
+            </div>
+
+            <!-- Scrollable Timeline Content -->
+            <div class="gem-tl-main">
+
+                <!-- ===== HERO INTRO ===== -->
+                <section class="gem-tl-section gem-tl-section--hero" id="gem-hero">
+                    <div class="gem-tl-section-inner">
+                        <p class="text-label" data-gem-animate>Foundation</p>
+                        <h2 class="text-section" data-gem-animate="fade-up">The 5 Elements of an <span class="accent">Effective Gem</span></h2>
+                        <p class="text-body-lg" data-gem-animate style="max-width: 900px;">Think of building a Gem like onboarding a new team member. We've already built most of your SPSA Data Coach &mdash; scroll to learn the elements and customize it for your school.</p>
+                        <div class="anatomy-gem-center" data-gem-animate="scale">
+                            <div class="anatomy-gem-icon">
+                                <i data-lucide="gem" style="width: 36px; height: 36px; color: var(--pink-400);"></i>
+                            </div>
+                            <div class="anatomy-gem-label">Your SPSA Data Coach</div>
+                            <div class="anatomy-gem-sublabel">Learn each element, then customize yours below</div>
+                        </div>
+                        <div class="gem-tl-scroll-cue" data-gem-animate>
+                            <span>Scroll to explore each element</span>
+                            <i data-lucide="chevron-down" style="width: 20px; height: 20px;"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── Divider: Intro → Role ── -->
+                <div class="gem-tl-divider" data-gem-divider style="--divider-color: var(--pink-400);">
+                    <div class="gem-tl-divider-line"></div>
+                    <div class="gem-tl-divider-dot" style="background: rgba(99,102,241,0.2); border-color: var(--pink-400);"></div>
+                    <div class="gem-tl-divider-label" style="color: var(--pink-400);">Element 1</div>
+                </div>
+
+                <!-- ===== SECTION 1: ROLE ===== -->
+                <section class="gem-tl-section" id="gem-role">
+                    <div class="gem-tl-section-inner">
+                        <div class="gem-tl-element-marker gem-tl-element-marker--pink" data-gem-animate="spring">
+                            <i data-lucide="user" style="width: 28px; height: 28px;"></i>
+                        </div>
+                        <h2 class="gem-tl-element-title gem-tl-element-title--pink" data-gem-animate="fade-up">Role</h2>
+                        <p class="gem-tl-element-subtitle" data-gem-animate>Who is this Gem? Define its expertise and perspective.</p>
+                        <div class="gem-tl-cards">
+                            <div class="glass-card gem-tl-event gem-tl-event--pink" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--pink"><i data-lucide="lightbulb" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">What It Means</div>
+                                </div>
+                                <p class="gem-tl-event-body">The Role is your Gem's <strong>job title and expertise</strong> &mdash; without it, you get generic answers instead of specialist advice.</p>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--pink" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--pink"><i data-lucide="quote" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Example Instruction</div>
+                                </div>
+                                <div class="gem-tl-example-block" style="border-left-color: var(--pink-500);">"You are an expert SPSA Compliance Officer and Data Analyst for VVUSD who specializes in reviewing School Plans for Student Achievement against district rubric standards and has deep knowledge of California education accountability requirements."</div>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--pink" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--pink"><i data-lucide="check-circle" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Tips for a Strong Role</div>
+                                </div>
+                                <ul class="gem-tl-tip-list" style="--tip-color: var(--pink-400);">
+                                    <li>Be specific about expertise level (e.g., "experienced," "expert in")</li>
+                                    <li>Include the domain (e.g., "K-12," "secondary ELA," "special education")</li>
+                                    <li>Name the perspective (e.g., "coach," "analyst," "advisor," "facilitator")</li>
+                                    <li>Mention relevant frameworks or methodologies the role should know</li>
+                                </ul>
+                            </div>
+                            <!-- Builder: Role preview (pre-built) -->
+                            <div class="gem-builder-slot" data-builder="role"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── Divider: Role → Purpose ── -->
+                <div class="gem-tl-divider" data-gem-divider style="--divider-color: var(--teal-400);">
+                    <div class="gem-tl-divider-line"></div>
+                    <div class="gem-tl-divider-dot" style="background: rgba(20,184,166,0.2); border-color: var(--teal-400);"></div>
+                    <div class="gem-tl-divider-label" style="color: var(--teal-400);">Element 2</div>
+                </div>
+
+                <!-- ===== SECTION 2: PURPOSE ===== -->
+                <section class="gem-tl-section" id="gem-purpose">
+                    <div class="gem-tl-section-inner">
+                        <div class="gem-tl-element-marker gem-tl-element-marker--teal" data-gem-animate="spring">
+                            <i data-lucide="target" style="width: 28px; height: 28px;"></i>
+                        </div>
+                        <h2 class="gem-tl-element-title gem-tl-element-title--teal" data-gem-animate="fade-up">Purpose</h2>
+                        <p class="gem-tl-element-subtitle" data-gem-animate>What does this Gem do? Be specific about the task.</p>
+                        <div class="gem-tl-cards">
+                            <div class="glass-card gem-tl-event gem-tl-event--teal" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--teal"><i data-lucide="lightbulb" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">What It Means</div>
+                                </div>
+                                <p class="gem-tl-event-body">The Purpose is the <strong>specific task</strong> your Gem performs. One job, one Gem &mdash; the more focused, the better the output.</p>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--teal" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--teal"><i data-lucide="quote" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Example Instruction</div>
+                                </div>
+                                <div class="gem-tl-example-block" style="border-left-color: var(--teal-500);">"...who reviews SPSA content against the VVUSD SPSA Self-Reflection Tool rubric, enforcing strict compliance rules around metrics specificity, effectiveness evidence, and equity analysis."</div>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--teal" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--teal"><i data-lucide="check-circle" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Tips for a Strong Purpose</div>
+                                </div>
+                                <ul class="gem-tl-tip-list" style="--tip-color: var(--teal-400);">
+                                    <li>Start with a verb: analyze, draft, create, design, facilitate</li>
+                                    <li>Name the output format (e.g., "write feedback emails," "create agendas")</li>
+                                    <li>Specify who receives the output (e.g., "for teachers," "for the board")</li>
+                                    <li>One Gem, one purpose &mdash; build separate Gems for separate tasks</li>
+                                </ul>
+                            </div>
+                            <!-- Builder: Purpose preview (pre-built) -->
+                            <div class="gem-builder-slot" data-builder="purpose"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── Divider: Purpose → Knowledge Base ── -->
+                <div class="gem-tl-divider" data-gem-divider style="--divider-color: var(--blue-400);">
+                    <div class="gem-tl-divider-line"></div>
+                    <div class="gem-tl-divider-dot" style="background: rgba(59,130,246,0.2); border-color: var(--blue-400);"></div>
+                    <div class="gem-tl-divider-label" style="color: var(--blue-400);">Element 3</div>
+                </div>
+
+                <!-- ===== SECTION 3: KNOWLEDGE BASE ===== -->
+                <section class="gem-tl-section" id="gem-knowledge">
+                    <div class="gem-tl-section-inner">
+                        <div class="gem-tl-element-marker gem-tl-element-marker--blue" data-gem-animate="spring">
+                            <i data-lucide="database" style="width: 28px; height: 28px;"></i>
+                        </div>
+                        <h2 class="gem-tl-element-title gem-tl-element-title--blue" data-gem-animate="fade-up">Knowledge Base</h2>
+                        <p class="gem-tl-element-subtitle" data-gem-animate>What documents should this Gem reference?</p>
+                        <div class="gem-tl-cards">
+                            <div class="glass-card gem-tl-event gem-tl-event--blue" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--blue"><i data-lucide="lightbulb" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">What It Means</div>
+                                </div>
+                                <p class="gem-tl-event-body">Uploaded documents become your Gem's <strong>reference library</strong> &mdash; it can cite, quote, and ground every answer in your actual data.</p>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--blue" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--blue"><i data-lucide="file-text" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Suggested Documents</div>
+                                </div>
+                                <div class="gem-tl-example-block" style="border-left-color: var(--blue-500);">School SPSA &bull; VVUSD SPSA Self-Reflection Tool &bull; Dashboard Data &bull; Needs Assessment &bull; Annual Review &bull; Budget Allocations &bull; SPSA Goals &bull; Student Group Data</div>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--blue" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--blue"><i data-lucide="check-circle" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Tips for a Strong Knowledge Base</div>
+                                </div>
+                                <ul class="gem-tl-tip-list" style="--tip-color: var(--blue-400);">
+                                    <li>Your SPSA and the VVUSD Self-Reflection Tool are the two essential uploads</li>
+                                    <li>Use text-based PDFs over scanned images &mdash; text is faster to process</li>
+                                    <li>Keep documents under 25MB each &mdash; smaller is better for processing</li>
+                                    <li>The Gem will cross-reference your SPSA against the rubric's "Look Fors"</li>
+                                </ul>
+                            </div>
+                            <!-- Builder: Knowledge Base checklist -->
+                            <div class="gem-builder-slot" data-builder="knowledge"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── Divider: Knowledge Base → Context ── -->
+                <div class="gem-tl-divider" data-gem-divider style="--divider-color: var(--purple-400);">
+                    <div class="gem-tl-divider-line"></div>
+                    <div class="gem-tl-divider-dot" style="background: rgba(168,85,247,0.2); border-color: var(--purple-400);"></div>
+                    <div class="gem-tl-divider-label" style="color: var(--purple-400);">Element 4</div>
+                </div>
+
+                <!-- ===== SECTION 4: CONTEXT ===== -->
+                <section class="gem-tl-section" id="gem-context">
+                    <div class="gem-tl-section-inner">
+                        <div class="gem-tl-element-marker gem-tl-element-marker--purple" data-gem-animate="spring">
+                            <i data-lucide="book-open" style="width: 28px; height: 28px;"></i>
+                        </div>
+                        <h2 class="gem-tl-element-title gem-tl-element-title--purple" data-gem-animate="fade-up">Context</h2>
+                        <p class="gem-tl-element-subtitle" data-gem-animate>Where does the Gem learn about your school?</p>
+                        <div class="gem-tl-cards">
+                            <div class="glass-card gem-tl-event gem-tl-event--purple" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--purple"><i data-lucide="lightbulb" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">What It Means</div>
+                                </div>
+                                <p class="gem-tl-event-body">Context is what separates a generic AI from <strong>your school's AI</strong>. For this Gem, context comes directly from your uploaded SPSA &mdash; no manual entry needed.</p>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--purple" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--purple"><i data-lucide="file-text" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">How It Works Here</div>
+                                </div>
+                                <div class="gem-tl-example-block" style="border-left-color: var(--purple-500);">When you upload your SPSA to the knowledge base, the Gem reads your school name, grade levels, demographics, SPSA priorities, identified needs, and goals directly from the document. No need to type it in separately.</div>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--purple" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--purple"><i data-lucide="check-circle" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Why This Matters</div>
+                                </div>
+                                <ul class="gem-tl-tip-list" style="--tip-color: var(--purple-400);">
+                                    <li>The Gem already knows your school because it has your plan</li>
+                                    <li>It can reference specific goals, metrics, and student groups from the SPSA</li>
+                                    <li>The rubric provides the "Look Fors" it checks your plan against</li>
+                                    <li>This is the power of a knowledge base &mdash; context without extra work</li>
+                                </ul>
+                            </div>
+                            <!-- Builder: Context info (automatic) -->
+                            <div class="gem-builder-slot" data-builder="context"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── Divider: Context → Tone & Voice ── -->
+                <div class="gem-tl-divider" data-gem-divider style="--divider-color: var(--amber-500);">
+                    <div class="gem-tl-divider-line"></div>
+                    <div class="gem-tl-divider-dot" style="background: rgba(245,158,11,0.2); border-color: var(--amber-500);"></div>
+                    <div class="gem-tl-divider-label" style="color: var(--amber-500);">Element 5</div>
+                </div>
+
+                <!-- ===== SECTION 5: TONE & VOICE ===== -->
+                <section class="gem-tl-section" id="gem-tone">
+                    <div class="gem-tl-section-inner">
+                        <div class="gem-tl-element-marker gem-tl-element-marker--amber" data-gem-animate="spring">
+                            <i data-lucide="megaphone" style="width: 28px; height: 28px;"></i>
+                        </div>
+                        <h2 class="gem-tl-element-title gem-tl-element-title--amber" data-gem-animate="fade-up">Tone & Voice</h2>
+                        <p class="gem-tl-element-subtitle" data-gem-animate>How should your Gem communicate? Set the personality <em>and</em> the intensity.</p>
+                        <div class="gem-tl-cards">
+                            <div class="glass-card gem-tl-event gem-tl-event--amber" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--amber"><i data-lucide="lightbulb" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">What It Means</div>
+                                </div>
+                                <p class="gem-tl-event-body">Tone sets your Gem's <strong>personality</strong>. Think of intensity on a 1&ndash;10 dial &mdash; most professional Gems land between 4 and 7.</p>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--amber" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--amber"><i data-lucide="quote" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Example Instruction</div>
+                                </div>
+                                <div class="gem-tl-example-block" style="border-left-color: var(--amber-500);">"Be warm and encouraging, like a trusted mentor. On a scale of 1&ndash;10, keep the personality at a 7 &mdash; clearly present but never over the top. Avoid jargon-heavy language. Write like you're talking to a colleague, not presenting at a conference."</div>
+                            </div>
+                            <div class="glass-card gem-tl-event gem-tl-event--amber" data-gem-animate>
+                                <div class="gem-tl-event-header">
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--amber"><i data-lucide="check-circle" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Tips for Setting Tone</div>
+                                </div>
+                                <ul class="gem-tl-tip-list" style="--tip-color: var(--amber-500);">
+                                    <li>Use an analogy: "like a trusted mentor," "like a policy analyst"</li>
+                                    <li>Set an explicit intensity level (1&ndash;10 scale) so the AI knows how far to go</li>
+                                    <li>Specify what to avoid: "never use emojis in formal memos"</li>
+                                    <li>Match tone to audience: staff vs. parents vs. board vs. students</li>
+                                </ul>
+                            </div>
+                            <!-- Builder: Tone selector (interactive) -->
+                            <div class="gem-builder-slot" data-builder="tone"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ── Divider: Tone → Your Questions ── -->
+                <div class="gem-tl-divider" data-gem-divider style="--divider-color: var(--green-400);">
+                    <div class="gem-tl-divider-line"></div>
+                    <div class="gem-tl-divider-dot" style="background: rgba(34,197,94,0.2); border-color: var(--green-400);"></div>
+                    <div class="gem-tl-divider-label" style="color: var(--green-400);">Element 6</div>
+                </div>
+
+                <!-- ===== SECTION 6: YOUR QUESTIONS ===== -->
+                <section class="gem-tl-section" id="gem-questions">
+                    <div class="gem-tl-section-inner">
+                        <div class="gem-tl-element-marker gem-tl-element-marker--green" data-gem-animate="spring">
+                            <i data-lucide="help-circle" style="width: 28px; height: 28px;"></i>
+                        </div>
+                        <h2 class="gem-tl-element-title gem-tl-element-title--green" data-gem-animate="fade-up">Your Questions</h2>
+                        <p class="gem-tl-element-subtitle" data-gem-animate>What else should your Gem analyze? Add up to 2 custom questions.</p>
+                        <div class="gem-tl-cards">
+                            <!-- Builder: Custom questions (interactive) -->
+                            <div class="gem-builder-slot" data-builder="questions"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ===== OUTRO: YOUR GEM ===== -->
+                <section class="gem-tl-section gem-tl-section--outro" id="gem-outro">
+                    <div class="gem-tl-section-inner">
+                        <!-- Builder: Final assembled prompt -->
+                        <div class="gem-builder-slot" data-builder="final"></div>
+
+                        <div class="gem-tl-continue-cue" data-gem-animate style="margin-top: var(--space-8);">
+                            <p>Want to fine-tune the wording before copying?</p>
+                            <button class="btn--shiny" onclick="changeSlide(1)">
+                                <span>Next: Refine & Copy</span>
+                                <i data-lucide="arrow-right" style="width: 18px; height: 18px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+            </div><!-- /.gem-tl-main -->
+        </div>
+
+
+
+        <!-- ==================== SLIDE 4: BUILD YOUR FIRST GEM ==================== -->
+        <div class="slide" id="slide-4">
+            <p class="text-label">Phase 2</p>
+            <h2 class="text-section">Build Your First Gem: <span class="accent">Step by Step</span></h2>
+            <p class="text-body-lg" style="max-width: 900px;">Follow along as we build your SPSA Data Coach Gem together. Check off each step as you complete it.</p>
+
+            <div class="step-list">
+                <!-- Step 1 -->
+                <div class="step-item" data-step="1">
+                    <div class="step-checkbox" onclick="toggleStep(1)"></div>
+                    <div class="step-content">
+                        <div class="step-title">Step 1: Open Gemini & Create a New Gem</div>
+                        <div class="step-desc">Go to gemini.google.com and sign in with your <strong>@valverde.edu</strong> account. Click the menu icon (&#9776;), then "Explore Gems," and click <strong>"+ New Gem"</strong>.</div>
+                        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 12px;">
+                            <a href="https://gemini.google.com" target="_blank" class="btn--shiny" style="font-size: 0.95rem; padding: 0.75rem 1.5rem;">
+                                <span>Open Gemini</span>
+                                <i data-lucide="external-link" style="width: 16px; height: 16px;"></i>
+                            </a>
+                            <div class="helper-video-btn" onclick="openHelperVideo('media/step1.mp4')">
+                                <div class="video-preview video-preview--inline">
+                                    <video autoplay muted loop playsinline>
+                                        <source src="media/step1.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <span>Watch how</span>
+                                <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-item" data-step="2">
+                    <div class="step-checkbox" onclick="toggleStep(2)"></div>
+                    <div class="step-content">
+                        <div class="step-title">Step 2: Name It & Paste Instructions</div>
+                        <div class="step-desc">Name your Gem <strong>SPSA Data Coach</strong>. For the instructions, use the <strong>"Copy Final Instructions"</strong> button from the previous slide — or copy the default version below.</div>
+                        <textarea class="code-block-editable" id="promptTemplate" oninput="autoExpand(this)"># SPSA Data Coach
+
+## Role & Identity
+You are an expert SPSA Compliance Officer and Data Analyst for VVUSD. Your goal is to help me refine my School Plan for Student Achievement.
+
+Tone: Balanced and professional — clear, approachable, and direct.
+
+## Core Task
+Review my SPSA content (in your files) against the "VVUSD SPSA Self-Reflection Tool" (also in your files).
+
+You must enforce 3 Strict Rules:
+
+### 1. The "So What?" Rule (Metrics & Alignment)
+- Check: Does every "Identified Need" lead to a specific "Goal"?
+- Metric Check: Flag metrics without specific Baseline and Expected Outcome
+- Critique: Reject vague metrics (e.g., "improve attendance"). Demand specific indicators (e.g., "Decrease chronic absenteeism rate from 12% to 10%")
+
+### 2. The "Prove It" Rule (Effectiveness)
+- Check: Compare Annual Review text to the "Look Fors" in the Rubric
+- Critique: If a strategy "went well," reject it. Demand evidence with aligned data/metrics of how specific student groups made growth
+
+### 3. The "Inequity" Rule
+- Check: Does the Comprehensive Needs Assessment identify resource inequities using Dashboard data (Red/Orange indicators)?
+- Critique: Ensure analysis of gaps between student groups (e.g., EL vs. EO, SED vs. Non-SED), not just overall school averages
+
+## Source Documents
+1. **School's SPSA** — Single Plan for Student Achievement with goals, needs assessment, strategies, and metrics
+2. **VVUSD SPSA Self-Reflection Tool** — District rubric with "Look Fors" for each SPSA section
+
+## Output Format
+1. **Compliance Summary** (overall status against the 3 rules)
+2. **"So What?" Findings** (needs-to-goals alignment, flagged vague metrics)
+3. **"Prove It" Findings** (Annual Review evidence gaps, missing student group data)
+4. **"Inequity" Findings** (missing disaggregated data, unaddressed Dashboard indicators)
+5. **Recommended Revisions** (specific, actionable fixes for each finding)
+
+## Guidelines
+- Ground every finding in specific text from the uploaded SPSA and rubric
+- Be direct about compliance gaps — do not soften findings that need attention
+- Frame recommendations as specific revisions, not general advice
+- Always reference which rubric "Look For" applies to each finding
+- When flagging vague metrics, provide an example of what a specific metric would look like
+- Consider equity implications: which student groups are missing from the analysis?
+- If data is incomplete or unclear, name what is missing rather than guessing</textarea>
+                        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 12px;">
+                            <button class="btn--shiny" onclick="copyPrompt(this, 1)" style="padding: 0.875rem 1.5rem; font-size: 1rem; width: fit-content;">
+                                <i data-lucide="clipboard" style="width: 16px; height: 16px;"></i>
+                                <span>Copy Prompt</span>
+                            </button>
+                            <div class="helper-video-btn" onclick="openHelperVideo('media/step2.mp4')">
+                                <div class="video-preview video-preview--inline">
+                                    <video autoplay muted loop playsinline>
+                                        <source src="media/step2.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                                <span>Watch how</span>
+                                <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-item" data-step="3">
+                    <div class="step-checkbox" onclick="toggleStep(3)"></div>
+                    <div class="step-content">
+                        <div class="step-title">Step 3: Add Knowledge Base Files & Save</div>
+                        <div class="step-desc">Click the "+" next to Knowledge to upload the two documents your Gem needs: your school's <strong>SPSA</strong> and the <strong>VVUSD SPSA Self-Reflection Tool</strong> rubric. Then click <strong>"Save"</strong> in the top right.</div>
+                        <div class="helper-video-btn" onclick="openHelperVideo('media/step3.mp4')" style="margin-top: 12px;">
+                            <div class="video-preview video-preview--inline">
+                                <video autoplay muted loop playsinline>
+                                    <source src="media/step3.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <span>Watch how</span>
+                            <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-item" data-step="4">
+                    <div class="step-checkbox" onclick="toggleStep(4)"></div>
+                    <div class="step-content">
+                        <div class="step-title">Step 4: Choose Your Model & Test</div>
+                        <div class="step-desc">Select a model — we recommend <strong>Gemini Thinking</strong> for SPSA compliance analysis. Avoid <strong>Gemini Pro</strong> for now — it uses credits fast. Then test your Gem by asking: <strong>"Review my SPSA against the rubric and flag any vague metrics."</strong></div>
+                        <div class="helper-video-btn" onclick="openHelperVideo('media/step4.mp4')" style="margin-top: 12px;">
+                            <div class="video-preview video-preview--inline">
+                                <video autoplay muted loop playsinline>
+                                    <source src="media/step4.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <span>Watch how</span>
+                            <i data-lucide="play-circle" style="width: 18px; height: 18px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                <p><strong>You just built an SPSA Data Coach.</strong> It knows the rubric, enforces the 3 compliance rules, and can review any school's SPSA. Share it with your team or customize it further.</p>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="controls">
+        <button class="control-btn" id="prevBtn" onclick="changeSlide(-1)">
+            <i data-lucide="chevron-left" style="width: 20px; height: 20px;"></i>
+        </button>
+        <span class="controls-counter" id="controlsCounter">1/4</span>
+        <div class="controls-dots" id="controlsDots">
+            <span class="controls-dot active" data-slide="0"></span>
+            <span class="controls-dot" data-slide="1"></span>
+            <span class="controls-dot" data-slide="2"></span>
+            <span class="controls-dot" data-slide="3"></span>
+        </div>
+        <button class="control-btn" id="nextBtn" onclick="changeSlide(1)">
+            <i data-lucide="chevron-right" style="width: 20px; height: 20px;"></i>
+        </button>
+    </div>
+
+    <!-- Gem Architect Script -->
+    <!-- Gem Instruction Builder Script -->
+    <script src="js/gem-builder.js"></script>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // ==================== PARTICLE SYSTEM ====================
+        (function() {
+            'use strict';
+            class HubParticle {
+                constructor(canvasWidth, canvasHeight, baseSpeed = 0.3) {
+                    this.x = Math.random() * canvasWidth;
+                    this.y = Math.random() * canvasHeight;
+                    this.vx = (Math.random() - 0.5) * baseSpeed;
+                    this.vy = (Math.random() - 0.5) * baseSpeed;
+                    this.radius = Math.random() * 1.5 + 0.5;
+                    this.baseOpacity = Math.random() * 0.4 + 0.2;
+                    this.opacity = this.baseOpacity;
+                    this.sparkleSpeed = Math.random() * 0.02 + 0.01;
+                    this.sparkleOffset = Math.random() * Math.PI * 2;
+                }
+                update(canvasWidth, canvasHeight) {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > canvasWidth) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvasHeight) this.vy *= -1;
+                    this.sparkleOffset += this.sparkleSpeed;
+                    const sparkle = Math.sin(this.sparkleOffset) * 0.3 + 0.7;
+                    this.opacity = this.baseOpacity * sparkle;
+                }
+                draw(ctx) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            const particlesContainer = document.getElementById('particles-container');
+            if (!particlesContainer) return;
+            const canvas = document.createElement('canvas');
+            particlesContainer.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const particleCount = 80, connectionDistance = 130, baseSpeed = 0.3;
+            const particles = [];
+            for (let i = 0; i < particleCount; i++) particles.push(new HubParticle(canvas.width, canvas.height, baseSpeed));
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => p.update(canvas.width, canvas.height));
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        if (distance < connectionDistance) {
+                            const opacity = 0.08 * (1 - distance / connectionDistance);
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                particles.forEach(p => p.draw(ctx));
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // ==================== CONFIGURATION ====================
+        const CONFIG = {
+            // UPDATE THIS URL after deploying your Apps Script web app!
+            SCRIPT_URL: 'YOUR_APPS_SCRIPT_URL_HERE'
+        };
+
+        // ==================== API HELPERS ====================
+        async function apiPost(action, data) {
+            try {
+                const response = await fetch(CONFIG.SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action, ...data }),
+                    mode: 'no-cors'
+                });
+                return { success: true, message: 'Submitted successfully!' };
+            } catch (error) {
+                console.error('API Error:', error);
+                return { success: false, message: 'Connection error. Please try again.' };
+            }
+        }
+
+        async function apiGet(action) {
+            try {
+                const url = `${CONFIG.SCRIPT_URL}?action=${action}`;
+                const response = await fetch(url);
+                return await response.json();
+            } catch (error) {
+                console.error('API Error:', error);
+                return { success: false, data: [] };
+            }
+        }
+
+        // ==================== STATE ====================
+        let currentSlide = 0;
+        const totalSlides = 4;
+        let userData = { name: '', email: '' };
+
+        // ==================== NAVIGATION ====================
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides[currentSlide].classList.remove('active');
+            currentSlide = Math.max(0, Math.min(n, totalSlides - 1));
+            slides[currentSlide].classList.add('active');
+
+            document.getElementById('slideCounter').textContent = `${currentSlide + 1} / ${totalSlides}`;
+            document.getElementById('progressBar').style.width = ((currentSlide + 1) / totalSlides * 100) + '%';
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+            document.getElementById('controlsCounter').textContent = `${currentSlide + 1}/${totalSlides}`;
+            updateControlsDots();
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Gem Element Timeline: activate/deactivate
+            if (currentSlide === 2) {
+                GemTimeline.activate();
+                // Initialize Gem Instruction Builder when Slide 3 is shown
+                if (window.GemInstructionBuilder && !window.GemInstructionBuilder.initialized) {
+                    window.GemInstructionBuilder.init();
+                }
+            } else {
+                GemTimeline.deactivate();
+            }
+
+            handleSlideChange();
+            lucide.createIcons();
+        }
+
+        // ==================== SLIDE ANIMATIONS ====================
+        function handleSlideChange() {
+            animateSlideElements(currentSlide);
+
+            if (currentSlide === 0) {
+                startCounterAnimation();
+            }
+        }
+
+        function animateSlideElements(slideIndex) {
+            const slide = document.querySelectorAll('.slide')[slideIndex];
+            if (!slide) return;
+
+            const animatedElements = slide.querySelectorAll('.slide-animate');
+            animatedElements.forEach(el => {
+                el.classList.remove('animate-in', 'animate-scale');
+                el.style.animation = 'none';
+                el.offsetHeight;
+                el.style.animation = '';
+            });
+
+            requestAnimationFrame(() => {
+                animatedElements.forEach(el => {
+                    el.classList.add('animate-in');
+                });
+            });
+        }
+
+        function startCounterAnimation() {
+            const counterEl = document.querySelector('#slide-1 [data-count-to]');
+            if (!counterEl) return;
+
+            const target = parseInt(counterEl.dataset.countTo);
+            const suffix = counterEl.dataset.countSuffix || '';
+            let current = 0;
+            counterEl.textContent = '0' + suffix;
+
+            setTimeout(() => {
+                const step = Math.ceil(target / 20);
+                const interval = setInterval(() => {
+                    current = Math.min(current + step, target);
+                    counterEl.textContent = current + suffix;
+                    if (current >= target) clearInterval(interval);
+                }, 50);
+            }, 1100);
+        }
+
+        function updateControlsDots() {
+            const dots = document.querySelectorAll('.controls-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index < currentSlide) dot.classList.add('completed');
+                else if (index === currentSlide) dot.classList.add('active');
+            });
+        }
+
+        document.getElementById('controlsDots').addEventListener('click', (e) => {
+            if (e.target.classList.contains('controls-dot')) {
+                showSlide(parseInt(e.target.dataset.slide));
+            }
+        });
+
+        function changeSlide(direction) { showSlide(currentSlide + direction); }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'Escape') { closeVideoModal(); }
+        });
+
+        // ==================== GUIDED BUILD ====================
+        function initializeSteps() {
+            const stepLists = document.querySelectorAll('.step-list');
+            stepLists.forEach(list => {
+                const steps = list.querySelectorAll('.step-item');
+                steps.forEach((step, index) => {
+                    if (index === 0) step.classList.add('current');
+                    else step.classList.add('locked');
+                });
+            });
+        }
+
+        function toggleStep(stepNum) {
+            const item = document.querySelector(`.step-item[data-step="${stepNum}"]`);
+            if (!item || item.classList.contains('locked')) return;
+
+            const checkbox = item.querySelector('.step-checkbox');
+            const isCompleting = !checkbox.classList.contains('checked');
+
+            checkbox.classList.toggle('checked');
+            item.classList.toggle('completed');
+
+            const maxStep = 6;
+
+            if (isCompleting) {
+                item.classList.remove('current');
+                const nextStep = document.querySelector(`.step-item[data-step="${stepNum + 1}"]`);
+                if (nextStep) { nextStep.classList.remove('locked'); nextStep.classList.add('current'); }
+            } else {
+                item.classList.add('current');
+                for (let i = stepNum + 1; i <= maxStep; i++) {
+                    const futureStep = document.querySelector(`.step-item[data-step="${i}"]`);
+                    if (futureStep) {
+                        futureStep.classList.add('locked');
+                        futureStep.classList.remove('current', 'completed');
+                        futureStep.querySelector('.step-checkbox').classList.remove('checked');
+                    }
+                }
+            }
+        }
+
+        // ==================== COPY PROMPT ====================
+        function copyPrompt(btn, promptNum) {
+            let codeBlock;
+            if (promptNum === 1) codeBlock = document.getElementById('promptTemplate');
+            else codeBlock = btn.closest('.step-content')?.querySelector('.code-block-editable');
+
+            if (!codeBlock) return;
+
+            const text = codeBlock.value !== undefined ? codeBlock.value : codeBlock.textContent;
+            navigator.clipboard.writeText(text.trim()).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i data-lucide="check" style="width: 14px; height: 14px;"></i><span>Copied!</span>';
+                lucide.createIcons();
+                setTimeout(() => { btn.innerHTML = originalHTML; lucide.createIcons(); }, 2000);
+            });
+        }
+
+        function autoExpand(textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
+
+        document.querySelectorAll('.form-textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() { autoExpand(this); });
+        });
+
+        // ==================== VIDEO MODAL ====================
+        function openHelperVideo(videoSrc) {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            modalVideo.querySelector('source').src = videoSrc;
+            modalVideo.load();
+            modal.classList.add('active');
+            modalVideo.currentTime = 0;
+            modalVideo.muted = true;
+            modalVideo.play();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            modal.classList.remove('active');
+            modalVideo.pause();
+            document.body.style.overflow = '';
+        }
+
+        // Prevent unmuting
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalVideo = document.getElementById('modalVideo');
+            if (modalVideo) {
+                modalVideo.addEventListener('volumechange', function() {
+                    if (!this.muted) this.muted = true;
+                });
+            }
+        });
+
+        // ==================== UTILITIES ====================
+        function showStatus(elementId, type, message) {
+            const el = document.getElementById(elementId);
+            el.className = 'status-message ' + type;
+            el.textContent = message;
+            if (type === 'success') setTimeout(() => { el.className = 'status-message'; }, 5000);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ==================== THEME TOGGLE ====================
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.getAttribute('data-theme') !== 'light';
+            const newTheme = isDark ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('gems-pd-theme', newTheme);
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('gems-pd-theme');
+            document.documentElement.setAttribute('data-theme', savedTheme || 'dark');
+        }
+
+        // ==================== PARTICLE BUTTONS ====================
+        function initParticleButtons() {
+            document.querySelectorAll('.btn--shiny').forEach(btn => {
+                if (btn.querySelector('.points-wrapper')) return;
+                const wrapper = document.createElement('div');
+                wrapper.className = 'points-wrapper';
+                for (let i = 0; i < 10; i++) {
+                    const point = document.createElement('i');
+                    point.className = 'point';
+                    wrapper.appendChild(point);
+                }
+                btn.insertBefore(wrapper, btn.firstChild);
+            });
+        }
+
+        // ==================== GEM ELEMENT TIMELINE (Slide 3) ====================
+        const GemTimeline = (function() {
+            'use strict';
+            let initialized = false;
+            let scrollHandler = null;
+
+            const sectionColors = {
+                'gem-hero':      { color: '#818CF8', glow: 'rgba(99,102,241,0.3)' },
+                'gem-role':      { color: '#818CF8', glow: 'rgba(99,102,241,0.3)' },
+                'gem-purpose':   { color: '#2dd4bf', glow: 'rgba(20,184,166,0.3)' },
+                'gem-context':   { color: '#c084fc', glow: 'rgba(168,85,247,0.3)' },
+                'gem-knowledge': { color: '#60a5fa', glow: 'rgba(59,130,246,0.3)' },
+                'gem-tone':      { color: '#f59e0b', glow: 'rgba(245,158,11,0.35)' },
+                'gem-questions': { color: '#4ade80', glow: 'rgba(34,197,94,0.3)' },
+                'gem-outro':     { color: '#2dd4bf', glow: 'rgba(20,184,166,0.3)' }
+            };
+
+            function init() {
+                if (initialized) return;
+                initialized = true;
+
+                // Scroll animations
+                const scrollObs = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            scrollObs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+                document.querySelectorAll('#slide-3 [data-gem-animate]').forEach(el => scrollObs.observe(el));
+
+                // Divider animations
+                const divObs = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            divObs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                document.querySelectorAll('#slide-3 [data-gem-divider]').forEach(el => divObs.observe(el));
+
+                // Section tracking for nav dots
+                const navDots = document.querySelectorAll('.gem-tl-nav-dot');
+                const secObs = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            navDots.forEach(dot => {
+                                dot.classList.remove('active');
+                                if (dot.dataset.gemSection === id) {
+                                    dot.classList.add('active');
+                                    const c = sectionColors[id];
+                                    if (c) {
+                                        dot.style.setProperty('--dot-color', c.color);
+                                        dot.style.setProperty('--dot-glow', c.glow);
+                                    }
+                                }
+                            });
+                        }
+                    });
+                }, { threshold: 0.3, rootMargin: '-15% 0px -15% 0px' });
+                document.querySelectorAll('#slide-3 .gem-tl-section').forEach(s => secObs.observe(s));
+
+                // Smooth scroll on dot click
+                navDots.forEach(dot => {
+                    dot.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.getElementById(dot.getAttribute('href').substring(1));
+                        if (target) {
+                            window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 72, behavior: 'smooth' });
+                        }
+                    });
+                });
+            }
+
+            function updateProgress() {
+                const slide3 = document.getElementById('slide-3');
+                if (!slide3 || !slide3.classList.contains('active')) return;
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+                const fill = document.getElementById('gemTimelineFill');
+                if (fill) fill.style.height = Math.min(progress, 100) + '%';
+            }
+
+            function activate() {
+                init();
+                scrollHandler = updateProgress;
+                window.addEventListener('scroll', scrollHandler, { passive: true });
+                updateProgress();
+            }
+
+            function deactivate() {
+                if (scrollHandler) {
+                    window.removeEventListener('scroll', scrollHandler);
+                    scrollHandler = null;
+                }
+                const fill = document.getElementById('gemTimelineFill');
+                if (fill) fill.style.height = '0%';
+            }
+
+            return { activate, deactivate };
+        })();
+
+        // ==================== INITIALIZE ====================
+        initTheme();
+        initParticleButtons();
+        initializeSteps();
+        showSlide(0);
+    </script>
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal" onclick="if(event.target === this) closeVideoModal()">
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideoModal()">
+                <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+            </button>
+            <video id="modalVideo" controls muted>
+                <source src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+</body>
+</html>
