@@ -146,7 +146,7 @@
     content: '';
     position: fixed;
     inset: 0;
-    background: #FFFFFF;
+    background: #FAFBFC;
     z-index: -1;
 }
 
@@ -174,27 +174,27 @@
 }
 [data-theme="light"] .gems-module .landing-orb { opacity: 0.35; }
 
-/* Light mode - Cards (solid white, no glass effects) */
+/* Light mode - Cards (pastel fills, minimal borders) */
 [data-theme="light"] .gems-module .glass-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #F8F7FF;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 [data-theme="light"] .gems-module .glass-card:hover {
-    background: #FFFFFF;
+    background: #F5F3FF;
     transform: translateY(-1px);
-    border-color: #D1D5DB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 [data-theme="light"] .gems-module .glass-card--highlight {
-    background: #FFFFFF;
-    border-color: #E5E7EB;
+    background: #F5F3FF;
+    border-color: rgba(99, 102, 241, 0.08);
 }
 [data-theme="light"] .gems-module .glass-card--highlight:hover {
-    border-color: rgba(99, 102, 241, 0.3);
+    border-color: rgba(99, 102, 241, 0.15);
 }
 
 /* Light mode - Buttons (solid indigo, minimal) */
@@ -287,14 +287,14 @@
 
 /* Light mode - Controls */
 [data-theme="light"] .gems-module .controls {
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
 [data-theme="light"] .gems-module .control-btn {
-    border-color: #D1D5DB;
+    border-color: rgba(0, 0, 0, 0.08);
     color: #4338CA;
 }
 [data-theme="light"] .gems-module .control-btn:hover:not(:disabled) {
@@ -306,61 +306,73 @@
 [data-theme="light"] .gems-module .controls-dot:hover { background: #9CA3AF; }
 [data-theme="light"] .gems-module .controls-dot.active { background: #4338CA; }
 [data-theme="light"] .gems-module .controls-dot.completed { background: #16A34A; }
-[data-theme="light"] .gems-module .dot-separator { background: #E5E7EB; }
+[data-theme="light"] .gems-module .dot-separator { background: rgba(0, 0, 0, 0.06); }
 
 /* Light mode - Gem Flow Cards */
 [data-theme="light"] .gems-module .gem-flow-step {
     background: #FFFFFF;
-    border: 1px solid #E5E7EB;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 [data-theme="light"] .gems-module .gem-flow-step:hover {
-    background: #FFFFFF;
-    transform: translateY(-1px);
-    border-color: #D1D5DB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    background: #FAFBFF;
+    transform: translateY(-2px);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 [data-theme="light"] .gems-module .gem-flow-arrow i { color: #4338CA; }
-[data-theme="light"] .gems-module .gem-flow-desc { color: #6B7280; }
+[data-theme="light"] .gems-module .gem-flow-desc { color: #4B5563; opacity: 1; }
+[data-theme="light"] .gems-module .gem-flow-label { text-shadow: none; }
+[data-theme="light"] .gems-module .gem-flow-icon {
+    border-width: 2px;
+}
+[data-theme="light"] .gems-module .slide.active .gem-flow-step:nth-child(1) .gem-flow-icon { animation: none; box-shadow: 0 2px 8px rgba(168, 85, 247, 0.15); }
+[data-theme="light"] .gems-module .slide.active .gem-flow-step:nth-child(2) .gem-flow-icon { animation: none; box-shadow: 0 2px 8px rgba(20, 184, 166, 0.15); }
+[data-theme="light"] .gems-module .slide.active .gem-flow-step:nth-child(3) .gem-flow-icon { animation: none; box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15); }
 [data-theme="light"] .gems-module .gem-flow-example {
-    background: rgba(99, 102, 241, 0.08);
-    border-color: rgba(99, 102, 241, 0.15);
-    color: #1F2937;
+    background: rgba(99, 102, 241, 0.06);
+    border: 1px solid rgba(99, 102, 241, 0.15);
+    color: #374151;
 }
 [data-theme="light"] .gems-module .gem-flow-file {
     background: rgba(20, 184, 166, 0.06);
-    border-color: rgba(20, 184, 166, 0.2);
-    color: #0d9488;
+    border: 1px solid rgba(20, 184, 166, 0.25);
+    color: #0D7377;
 }
 [data-theme="light"] .gems-module .gem-flow-upload-target {
-    border-color: rgba(20, 184, 166, 0.2);
-    color: rgba(20, 184, 166, 0.5);
+    border-color: rgba(20, 184, 166, 0.3);
+    color: rgba(13, 115, 119, 0.5);
 }
+[data-theme="light"] .gems-module .gem-flow-network .net-line { stroke: rgba(99, 102, 241, 0.2); }
+[data-theme="light"] .gems-module .gem-flow-network .net-center { fill: rgba(99, 102, 241, 0.15); stroke: rgba(99, 102, 241, 0.4); }
+[data-theme="light"] .gems-module .gem-flow-network .net-node { fill: rgba(99, 102, 241, 0.3); }
 
 /* Light mode - Step Cards */
 [data-theme="light"] .gems-module .step-item {
-    background: #FFFFFF !important;
-    border: 1px solid #E5E7EB !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    background: #FAFAFA !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    box-shadow: none !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 [data-theme="light"] .gems-module .step-item:hover {
     transform: translateY(-1px);
-    border-color: #D1D5DB !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
 }
 [data-theme="light"] .gems-module .step-item.current {
+    background: #F5F3FF !important;
+    border: 1px solid rgba(99, 102, 241, 0.1) !important;
     border-left: 4px solid #4338CA !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: none !important;
 }
 [data-theme="light"] .gems-module .step-item.completed {
     background: #F0FDF4 !important;
-    border-color: #BBF7D0 !important;
+    border: 1px solid rgba(22, 163, 74, 0.08) !important;
     border-left: 4px solid #16A34A !important;
 }
 [data-theme="light"] .gems-module .step-title { color: #111827 !important; }
@@ -368,7 +380,7 @@
 
 /* Light mode - Step Checkbox */
 [data-theme="light"] .gems-module .step-checkbox {
-    border-color: #D1D5DB !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
     background: #FFFFFF !important;
 }
 [data-theme="light"] .gems-module .step-checkbox:hover {
@@ -397,75 +409,75 @@
 /* Light mode - Quote Box */
 [data-theme="light"] .gems-module .quote-box {
     background: #F0FDF4;
-    border: 1px solid #BBF7D0;
+    border: 1px solid rgba(22, 163, 74, 0.08);
     border-left: 4px solid #16A34A;
 }
 [data-theme="light"] .gems-module .quote-box p { color: #374151; }
 
 /* Light mode - Helper Video */
 [data-theme="light"] .gems-module .helper-video-btn {
-    background: #FAFAFA;
-    border-color: #E5E7EB;
+    background: #F5F3FF;
+    border-color: rgba(0, 0, 0, 0.04);
     color: #6B7280;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
 [data-theme="light"] .gems-module .helper-video-btn:hover {
-    background: #FFFFFF;
-    border-color: rgba(99, 102, 241, 0.3);
+    background: #EDE9FE;
+    border-color: rgba(99, 102, 241, 0.1);
     color: #111827;
     transform: translateY(-1px);
 }
-[data-theme="light"] .gems-module .video-preview { border-color: #E5E7EB; }
+[data-theme="light"] .gems-module .video-preview { border-color: rgba(0, 0, 0, 0.04); }
 [data-theme="light"] .gems-module .video-preview:hover {
-    border-color: #D1D5DB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.06);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Light mode - Inspiration Cards */
 [data-theme="light"] .gems-module .inspiration-card {
-    background: #FFFFFF !important;
-    border: 1px solid #E5E7EB !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    background: #F0F9FF !important;
+    border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    box-shadow: none !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
 [data-theme="light"] .gems-module .inspiration-card:hover {
-    background: #FFFFFF !important;
-    border-color: #D1D5DB !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+    background: #E8F4FD !important;
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
     transform: translateY(-1px);
 }
 
 /* Light mode - Ideas List */
 [data-theme="light"] .gems-module .ideas-list-container {
-    background: #FFFFFF;
+    background: #FAFAFA;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-color: #E5E7EB;
+    border-color: rgba(0, 0, 0, 0.04);
 }
 [data-theme="light"] .gems-module .idea-item {
     background: #FFFFFF !important;
-    border-color: #E5E7EB !important;
+    border-color: rgba(0, 0, 0, 0.04) !important;
 }
 [data-theme="light"] .gems-module .idea-item-text { color: #111827 !important; }
 [data-theme="light"] .gems-module .idea-item-author { color: #6B7280 !important; }
 
 /* Light mode - Anatomy Cards */
 [data-theme="light"] .gems-module .anatomy-card {
-    background: #FFFFFF !important;
-    border-color: #E5E7EB !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #F8F7FF !important;
+    border-color: rgba(0, 0, 0, 0.04) !important;
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
 [data-theme="light"] .gems-module .anatomy-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-[data-theme="light"] .gems-module .anatomy-timeline::before { opacity: 0.3; }
+[data-theme="light"] .gems-module .anatomy-timeline::before { opacity: 0.2; }
 [data-theme="light"] .gems-module .anatomy-example {
-    background: #FAFAFA;
-    border-color: #E5E7EB;
+    background: rgba(99, 102, 241, 0.04);
+    border-color: rgba(0, 0, 0, 0.04);
 }
 
 /* Light mode - Gem Assembly Center */
@@ -495,8 +507,8 @@
     border-color: var(--border-default);
 }
 [data-theme="light"] .gems-module .gem-compare--before {
-    background: #FFFFFF;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #F9FAFB;
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
@@ -517,8 +529,8 @@
     background: radial-gradient(circle at 50% 120%, rgba(99, 102, 241, 0.06), transparent 60%);
 }
 [data-theme="light"] .gems-module .gem-compare-icon--before {
-    background: rgba(243, 244, 246, 0.8);
-    border-color: rgba(2, 6, 23, 0.08);
+    background: rgba(243, 244, 246, 0.6);
+    border-color: rgba(0, 0, 0, 0.04);
 }
 [data-theme="light"] .gems-module .gem-compare-icon--after {
     background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
@@ -549,7 +561,7 @@
 }
 [data-theme="light"] .gems-module .gem-compare-arrow {
     background: #FFFFFF;
-    border-color: #E5E7EB;
+    border-color: rgba(0, 0, 0, 0.06);
     color: #4338CA;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -568,74 +580,74 @@
 
 /* Light mode - Model Cards */
 [data-theme="light"] .gems-module .model-card {
-    background: #FFFFFF !important;
-    border-color: #E5E7EB !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #FAFAFA !important;
+    border-color: rgba(0, 0, 0, 0.04) !important;
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
 [data-theme="light"] .gems-module .model-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 [data-theme="light"] .gems-module .model-card-tagline { color: #6B7280; }
 [data-theme="light"] .gems-module .model-card-list li { color: #374151; }
 
 /* Light mode - Stat Cards */
 [data-theme="light"] .gems-module .stat-card {
-    background: #FFFFFF;
+    background: #F5F3FF;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-color: #E5E7EB;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.04);
+    box-shadow: none;
 }
 
 /* Light mode - Benefits Strip */
 [data-theme="light"] .gems-module .gem-benefit-card {
-    background: #FFFFFF;
-    border-color: #E5E7EB;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #FAFAFA;
+    border-color: rgba(0, 0, 0, 0.04);
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
-[data-theme="light"] .gems-module .gem-benefit--purple { border-color: rgba(168, 85, 247, 0.2); }
-[data-theme="light"] .gems-module .gem-benefit--blue { border-color: rgba(59, 130, 246, 0.2); }
-[data-theme="light"] .gems-module .gem-benefit--amber { border-color: rgba(245, 158, 11, 0.2); }
+[data-theme="light"] .gems-module .gem-benefit--purple { background: #FAF5FF; border-color: rgba(168, 85, 247, 0.08); }
+[data-theme="light"] .gems-module .gem-benefit--blue { background: #EFF6FF; border-color: rgba(59, 130, 246, 0.08); }
+[data-theme="light"] .gems-module .gem-benefit--amber { background: #FFFBEB; border-color: rgba(245, 158, 11, 0.08); }
 [data-theme="light"] .gems-module .gem-benefit-desc {
     color: #6B7280;
 }
 
 /* Light mode - Scaling Cards */
 [data-theme="light"] .gems-module .scaling-card {
-    background: #FFFFFF !important;
+    background: #F8FAFC !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-color: #E5E7EB !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.04) !important;
+    box-shadow: none;
 }
 [data-theme="light"] .gems-module .scaling-card:hover {
-    border-color: #D1D5DB !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Light mode - Gallery */
 [data-theme="light"] .gems-module .gallery-card {
-    background: #FFFFFF !important;
+    background: #F8F7FF !important;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-color: #E5E7EB !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.04) !important;
+    box-shadow: none;
 }
 [data-theme="light"] .gems-module .gallery-card:hover {
-    border-color: #D1D5DB !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Light mode - Forms */
 [data-theme="light"] .gems-module .form-input,
 [data-theme="light"] .gems-module .form-select,
 [data-theme="light"] .gems-module .form-textarea {
-    background: #FFFFFF;
-    border-color: #E5E7EB;
+    background: #FAFAFA;
+    border-color: rgba(0, 0, 0, 0.08);
     color: #111827;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -661,7 +673,7 @@
 /* Light mode - Rating & Toggle buttons */
 [data-theme="light"] .gems-module .rating-btn,
 [data-theme="light"] .gems-module .toggle-btn {
-    background: #FFFFFF; border-color: #E5E7EB; color: #9CA3AF;
+    background: #FAFAFA; border-color: rgba(0, 0, 0, 0.06); color: #9CA3AF;
 }
 [data-theme="light"] .gems-module .rating-btn:hover,
 [data-theme="light"] .gems-module .rating-btn.selected,
@@ -710,16 +722,16 @@
 
 /* Light mode - Radio Cards (Gem Architect) */
 [data-theme="light"] .gems-module .radio-card-content {
-    background: #FFFFFF;
-    border: 2px solid #E5E7EB;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    background: #FAFAFA;
+    border: 2px solid rgba(0, 0, 0, 0.05);
+    box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
 }
 [data-theme="light"] .gems-module .radio-card:hover .radio-card-content {
-    border-color: #D1D5DB;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
-    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    background: #F5F3FF;
 }
 [data-theme="light"] .gems-module .radio-card input:checked + .radio-card-content {
     background: rgba(20, 184, 166, 0.04);
@@ -743,6 +755,167 @@
 }
 [data-theme="light"] .gems-module .radio-card input:checked + .radio-card-content .radio-card-sub {
     color: #6B7280;
+}
+
+/* Light mode - Gem Builder Cards */
+[data-theme="light"] .gems-module .gem-builder-card {
+    background: #FAFAFA;
+    border: 1px dashed rgba(0, 0, 0, 0.1);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+[data-theme="light"] .gems-module .gem-builder-card--pink   { border-color: rgba(99, 102, 241, 0.15); background: #F8F7FF; }
+[data-theme="light"] .gems-module .gem-builder-card--teal   { border-color: rgba(20, 184, 166, 0.15); background: #F0FDFA; }
+[data-theme="light"] .gems-module .gem-builder-card--purple { border-color: rgba(168, 85, 247, 0.15); background: #FAF5FF; }
+[data-theme="light"] .gems-module .gem-builder-card--blue   { border-color: rgba(59, 130, 246, 0.15); background: #EFF6FF; }
+[data-theme="light"] .gems-module .gem-builder-card--amber  { border-color: rgba(245, 158, 11, 0.15); background: #FFFBEB; }
+[data-theme="light"] .gems-module .gem-builder-card--green  { border-color: rgba(34, 197, 94, 0.15); background: #F0FDF4; }
+
+[data-theme="light"] .gems-module .gem-builder-card-title { color: #1F2937; }
+[data-theme="light"] .gems-module .gem-builder-card-desc { color: #5f6368; }
+
+[data-theme="light"] .gems-module .gem-builder-badge--pink   { background: rgba(99, 102, 241, 0.1); color: #4338CA; }
+[data-theme="light"] .gems-module .gem-builder-badge--teal   { background: rgba(20, 184, 166, 0.1); color: #0D9488; }
+[data-theme="light"] .gems-module .gem-builder-badge--purple { background: rgba(168, 85, 247, 0.1); color: #7C3AED; }
+[data-theme="light"] .gems-module .gem-builder-badge--blue   { background: rgba(59, 130, 246, 0.1); color: #2563EB; }
+[data-theme="light"] .gems-module .gem-builder-badge--amber  { background: rgba(245, 158, 11, 0.1); color: #D97706; }
+[data-theme="light"] .gems-module .gem-builder-badge--green  { background: rgba(34, 197, 94, 0.1); color: #16A34A; }
+
+/* Light mode - Builder Preview Cards */
+[data-theme="light"] .gems-module .gem-builder-preview--pink { border-color: rgba(99, 102, 241, 0.12); background: #F8F7FF; }
+[data-theme="light"] .gems-module .gem-builder-preview--teal { border-color: rgba(20, 184, 166, 0.12); background: #F0FDFA; }
+[data-theme="light"] .gems-module .gem-builder-preview-text {
+    background: rgba(0, 0, 0, 0.02);
+    border-left-color: rgba(0, 0, 0, 0.08);
+    color: #374151;
+}
+
+/* Light mode - Builder Checklist */
+[data-theme="light"] .gems-module .gem-builder-checklist-item {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .gems-module .gem-builder-checklist-item:hover {
+    border-color: rgba(59, 130, 246, 0.2);
+}
+[data-theme="light"] .gems-module .gem-builder-checklist-check {
+    border-color: rgba(0, 0, 0, 0.15);
+}
+[data-theme="light"] .gems-module .gem-builder-checklist-label { color: #1F2937; }
+[data-theme="light"] .gems-module .gem-builder-checklist-desc { color: #6B7280; }
+
+/* Light mode - Builder Note */
+[data-theme="light"] .gems-module .gem-builder-note {
+    background: rgba(59, 130, 246, 0.05);
+    border-color: rgba(59, 130, 246, 0.1);
+    color: #5f6368;
+}
+[data-theme="light"] .gems-module .gem-builder-note i { color: #2563EB; }
+
+/* Light mode - Builder Form Elements */
+[data-theme="light"] .gems-module .gem-builder-input,
+[data-theme="light"] .gems-module .gem-builder-textarea {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #1F2937;
+}
+[data-theme="light"] .gems-module .gem-builder-input:focus,
+[data-theme="light"] .gems-module .gem-builder-textarea:focus {
+    border-color: #7C3AED;
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.08);
+}
+[data-theme="light"] .gems-module .gem-builder-input::placeholder,
+[data-theme="light"] .gems-module .gem-builder-textarea::placeholder { color: #9CA3AF; }
+
+/* Light mode - Builder Chips */
+[data-theme="light"] .gems-module .gem-builder-chip {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.08);
+    color: #5f6368;
+}
+[data-theme="light"] .gems-module .gem-builder-chip:hover {
+    background: #F5F3FF;
+    border-color: rgba(0, 0, 0, 0.12);
+}
+[data-theme="light"] .gems-module .gem-builder-chip--active {
+    background: rgba(168, 85, 247, 0.08);
+    border-color: #7C3AED;
+    color: #7C3AED;
+}
+[data-theme="light"] .gems-module .gem-builder-card--green .gem-builder-chip--active {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: #16A34A;
+    color: #16A34A;
+}
+
+/* Light mode - Builder Example Chips */
+[data-theme="light"] .gems-module .gem-builder-example-chip {
+    background: rgba(34, 197, 94, 0.04);
+    border-color: rgba(34, 197, 94, 0.1);
+    color: #6B7280;
+}
+[data-theme="light"] .gems-module .gem-builder-example-chip:hover {
+    background: rgba(34, 197, 94, 0.08);
+    border-color: #16A34A;
+    color: #16A34A;
+}
+
+/* Light mode - Builder Tone Selector */
+[data-theme="light"] .gems-module .gem-builder-tone-option {
+    background: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .gems-module .gem-builder-tone-option:hover {
+    border-color: rgba(245, 158, 11, 0.2);
+    background: #FFFBEB;
+}
+[data-theme="light"] .gems-module .gem-builder-tone-option--active {
+    border-color: #D97706;
+    background: #FFFBEB;
+    box-shadow: 0 0 0 1px rgba(245, 158, 11, 0.15);
+}
+[data-theme="light"] .gems-module .gem-builder-tone-icon {
+    background: rgba(245, 158, 11, 0.08);
+    color: #D97706;
+}
+[data-theme="light"] .gems-module .gem-builder-tone-label { color: #1F2937; }
+[data-theme="light"] .gems-module .gem-builder-tone-desc { color: #6B7280; }
+
+/* Light mode - Builder Intensity */
+[data-theme="light"] .gems-module .gem-builder-intensity {
+    background: #FFFBEB;
+    border-color: rgba(245, 158, 11, 0.1);
+}
+[data-theme="light"] .gems-module .gem-builder-intensity-header { color: #D97706; }
+[data-theme="light"] .gems-module .gem-builder-intensity-value { background: rgba(245, 158, 11, 0.05); }
+
+/* Light mode - Builder Final Prompt */
+[data-theme="light"] .gems-module .gem-builder-final-prompt {
+    background: #1F2937;
+    color: #D1D5DB;
+}
+[data-theme="light"] .gems-module .gem-builder-final-prompt-wrap {
+    border-color: rgba(0, 0, 0, 0.06);
+}
+[data-theme="light"] .gems-module .gem-builder-final-hint {
+    background: rgba(168, 85, 247, 0.04);
+    border-color: rgba(168, 85, 247, 0.08);
+    color: #5f6368;
+}
+[data-theme="light"] .gems-module .gem-builder-final-steps {
+    background: #FAFAFA;
+    border-color: rgba(0, 0, 0, 0.04);
+}
+[data-theme="light"] .gems-module .gem-builder-final-steps p { color: #374151; }
+[data-theme="light"] .gems-module .gem-builder-final-steps ol { color: #5f6368; }
+[data-theme="light"] .gems-module .gem-builder-gemini-btn {
+    background: #FAFAFA !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    color: #1F2937 !important;
+}
+[data-theme="light"] .gems-module .gem-builder-gemini-btn:hover {
+    background: #F5F3FF !important;
+    border-color: rgba(0, 0, 0, 0.12) !important;
 }
 
 /* Light mode - Theme Toggle */
