@@ -15,6 +15,9 @@ window.GemInstructionBuilder = {
         docsReady: { spsa: false, rubric: false }
     },
 
+    // Tracks whether the user has manually edited the slide 4 textarea
+    slide4ManuallyEdited: false,
+
     // Tone presets
     tonePresets: [
         { value: 'reflective-coach', label: 'Reflective Coach', icon: 'heart-handshake', desc: 'Warm, inquiry-driven, like a trusted thought partner' },
@@ -64,6 +67,17 @@ window.GemInstructionBuilder = {
         this.injectBuilderCards();
         this.bindEvents();
         this.initialized = true;
+
+        // Sync initial prompt to slide 4
+        this.updateFinalPrompt();
+
+        // Stop syncing if the user manually edits the slide 4 textarea
+        const slide4Prompt = document.getElementById('promptTemplate');
+        if (slide4Prompt) {
+            slide4Prompt.addEventListener('input', () => {
+                this.slide4ManuallyEdited = true;
+            });
+        }
     },
 
     injectBuilderCards() {
@@ -536,9 +550,18 @@ ${customQuestionsOutput}
     },
 
     updateFinalPrompt() {
+        const prompt = this.assemblePrompt();
         const output = document.getElementById('gem-builder-output');
         if (output) {
-            output.textContent = this.assemblePrompt();
+            output.textContent = prompt;
+        }
+        // Sync to slide 4's prompt textarea (skip if user has manually edited it)
+        if (!this.slide4ManuallyEdited) {
+            const slide4Prompt = document.getElementById('promptTemplate');
+            if (slide4Prompt) {
+                slide4Prompt.value = prompt;
+                autoExpand(slide4Prompt);
+            }
         }
     },
 
@@ -568,7 +591,9 @@ ${customQuestionsOutput}
             customQuestion2: '',
             docsReady: { spsa: false, rubric: false }
         };
+        this.slide4ManuallyEdited = false;
         this.injectBuilderCards();
+        this.updateFinalPrompt();
     },
 
     toggleArrayItem(arr, value) {
