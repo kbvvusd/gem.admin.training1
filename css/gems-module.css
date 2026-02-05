@@ -17,8 +17,8 @@
     --bg-base: #0d1117;
 
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-muted: rgba(255, 255, 255, 0.4);
+    --text-secondary: rgba(255, 255, 255, 0.85);
+    --text-muted: rgba(255, 255, 255, 0.6);
 
     --border-subtle: rgba(255, 255, 255, 0.06);
     --border-default: rgba(255, 255, 255, 0.1);
@@ -1463,7 +1463,7 @@
     margin-bottom: 10px; text-shadow: 0 0 20px currentColor;
 }
 .gems-module .gem-flow-label i { width: 18px !important; height: 18px !important; }
-.gems-module .gem-flow-desc { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 14px; line-height: 1.5; opacity: 0.7; }
+.gems-module .gem-flow-desc { color: var(--text-muted); font-size: 0.875rem; margin-bottom: 14px; line-height: 1.5; }
 .gems-module .gem-flow-example {
     margin-top: auto; padding: 12px 14px;
     background: rgba(168, 85, 247, 0.12);
@@ -2946,6 +2946,145 @@ body.light-mode .tone-intensity-container {
     font-size: 1.1rem;
 }
 
+/* ============================================================
+   Context Section: "How It Works Here" File Flow
+   ============================================================ */
+
+/* File card — adapts .gem-flow-file pattern to purple */
+.gems-module .gem-context-file {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(168, 85, 247, 0.08);
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    opacity: 0;
+    transform: translateX(-12px);
+}
+
+.gems-module .gem-context-file-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    background: rgba(168, 85, 247, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--purple-400);
+}
+
+.gems-module .gem-context-file-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.gems-module .gem-context-file-name {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--purple-300);
+}
+
+.gems-module .gem-context-file-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Staggered entrance — reuses gems-fileSlideIn keyframe */
+.gems-module [data-gem-animate].visible .gem-context-file--1 {
+    animation: gems-fileSlideIn 0.4s var(--ease-out) 0.2s forwards;
+}
+.gems-module [data-gem-animate].visible .gem-context-file--2 {
+    animation: gems-fileSlideIn 0.4s var(--ease-out) 0.4s forwards;
+}
+
+/* Merge indicator — horizontal line + badge + line */
+.gems-module .gem-context-merge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0 10px;
+    opacity: 0;
+}
+
+.gems-module [data-gem-animate].visible .gem-context-merge {
+    animation: gems-contextMergeIn 0.5s var(--ease-out) 0.6s forwards;
+}
+
+.gems-module .gem-context-merge-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.4), transparent);
+}
+
+.gems-module .gem-context-merge-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--purple-400);
+    flex-shrink: 0;
+    animation: gems-contextBadgePulse 3s ease-in-out infinite;
+    animation-play-state: paused;
+}
+
+.gems-module [data-gem-animate].visible .gem-context-merge-badge {
+    animation-play-state: running;
+}
+
+@keyframes gems-contextBadgePulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(168, 85, 247, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), 0 0 40px rgba(168, 85, 247, 0.2); }
+}
+
+@keyframes gems-contextMergeIn {
+    from { opacity: 0; transform: scaleX(0.3); }
+    to { opacity: 1; transform: scaleX(1); }
+}
+
+/* Result line */
+.gems-module .gem-context-result {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: rgba(168, 85, 247, 0.06);
+    border: 1px solid rgba(168, 85, 247, 0.15);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--purple-300);
+    font-weight: 500;
+    opacity: 0;
+}
+
+.gems-module [data-gem-animate].visible .gem-context-result {
+    animation: gems-fileSlideIn 0.4s var(--ease-out) 0.8s forwards;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .gems-module .gem-context-file,
+    .gems-module .gem-context-merge,
+    .gems-module .gem-context-result {
+        opacity: 1;
+        transform: none;
+        animation: none !important;
+    }
+    .gems-module .gem-context-merge-badge {
+        animation: none !important;
+    }
+}
+
 /* Light mode overrides */
 [data-theme="light"] .gems-module .gem-tl-line { background: rgba(2, 6, 23, 0.08); }
 [data-theme="light"] .gems-module .gem-tl-nav-dot { background: rgba(2, 6, 23, 0.1); border-color: rgba(2, 6, 23, 0.15); }
@@ -2963,6 +3102,31 @@ body.light-mode .tone-intensity-container {
 [data-theme="light"] .gems-module .gem-tl-element-title--amber { color: #b45309; }
 [data-theme="light"] .gems-module .gem-tl-scroll-cue { color: var(--text-secondary); }
 [data-theme="light"] .gems-module .gem-tl-example-block { background: rgba(2, 6, 23, 0.02); }
+
+/* Light mode: context file flow */
+[data-theme="light"] .gems-module .gem-context-file {
+    background: rgba(168, 85, 247, 0.06);
+    border-color: rgba(168, 85, 247, 0.18);
+}
+[data-theme="light"] .gems-module .gem-context-file-icon {
+    background: rgba(168, 85, 247, 0.1);
+    color: var(--purple-600);
+}
+[data-theme="light"] .gems-module .gem-context-file-name { color: var(--purple-700, #7e22ce); }
+[data-theme="light"] .gems-module .gem-context-file-desc { color: #4b5563; }
+[data-theme="light"] .gems-module .gem-context-merge-badge {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.25);
+    color: var(--purple-600);
+}
+[data-theme="light"] .gems-module .gem-context-merge-line {
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.25), transparent);
+}
+[data-theme="light"] .gems-module .gem-context-result {
+    background: rgba(168, 85, 247, 0.05);
+    border-color: rgba(168, 85, 247, 0.12);
+    color: var(--purple-700, #7e22ce);
+}
 
 
 /* ------------------------------------------------------------
@@ -3000,6 +3164,10 @@ body.light-mode .tone-intensity-container {
     .gems-module .gem-tl-cards { grid-template-columns: 1fr; }
     .gems-module .gem-tl-cards > :nth-child(3) { grid-column: auto; }
     .gems-module .gem-tl-divider-line { height: 50px; }
+
+    /* Context file flow - mobile */
+    .gems-module .gem-context-file-name { font-size: 0.8rem; }
+    .gems-module .gem-context-file-desc { font-size: 0.75rem; }
 
     /* Gem Compare - stack vertically on mobile */
     .gems-module .gem-compare { flex-direction: column; gap: 16px; }

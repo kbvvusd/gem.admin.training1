@@ -71,7 +71,7 @@
                     </div>
                     <div class="gem-compare-label gem-compare-label--before">Without a Gem</div>
                     <div class="gem-compare-text">You re-explain your role, your school, and your priorities <em>every single time</em> you use AI.</div>
-                    <div class="gem-compare-example">"I'm a principal at an elementary school. We use the Danielson Framework. Our SPSA goals focus on..."</div>
+                    <div class="gem-compare-example">"I'm a principal at an elementary school. We use a specific evaluation framework. Our SPSA goals focus on..."</div>
                 </div>
 
                 <div class="gem-compare-divider">
@@ -411,7 +411,6 @@
                                 <ul class="gem-tl-tip-list" style="--tip-color: var(--blue-400);">
                                     <li>Your SPSA and the VVUSD Self-Reflection Tool are the two essential uploads</li>
                                     <li>Use text-based PDFs over scanned images &mdash; text is faster to process</li>
-                                    <li>Keep documents under 25MB each &mdash; smaller is better for processing</li>
                                     <li>The Gem will cross-reference your SPSA against the rubric's "Look Fors"</li>
                                 </ul>
                             </div>
@@ -442,26 +441,67 @@
                                     <div class="gem-tl-event-icon gem-tl-event-icon--purple"><i data-lucide="lightbulb" style="width: 22px; height: 22px;"></i></div>
                                     <div class="gem-tl-event-title">What It Means</div>
                                 </div>
-                                <p class="gem-tl-event-body">Context is what separates a generic AI from <strong>your school's AI</strong>. For this Gem, context comes directly from your uploaded SPSA &mdash; no manual entry needed.</p>
+                                <p class="gem-tl-event-body">Context is what separates a generic AI from <strong>your school's AI</strong>. For this Gem, context comes directly from the files in your knowledge base &mdash; no manual entry needed. The two files you uploaded do the heavy lifting:</p>
+                                <ul class="gem-tl-tip-list" style="--tip-color: var(--purple-400);">
+                                    <li><strong>Your school's SPSA</strong> &mdash; provides your school name, grade levels, demographics, priorities, identified needs, goals, strategies, metrics, and budget allocations</li>
+                                    <li><strong>VVUSD SPSA Self-Reflection Tool</strong> &mdash; provides the district rubric with section-by-section "Look Fors," compliance standards, and quality benchmarks the Gem checks your plan against</li>
+                                </ul>
                             </div>
                             <div class="glass-card gem-tl-event gem-tl-event--purple" data-gem-animate>
                                 <div class="gem-tl-event-header">
                                     <div class="gem-tl-event-icon gem-tl-event-icon--purple"><i data-lucide="file-text" style="width: 22px; height: 22px;"></i></div>
                                     <div class="gem-tl-event-title">How It Works Here</div>
                                 </div>
-                                <div class="gem-tl-example-block" style="border-left-color: var(--purple-500);">When you upload your SPSA to the knowledge base, the Gem reads your school name, grade levels, demographics, SPSA priorities, identified needs, and goals directly from the document. No need to type it in separately.</div>
+                                <p class="gem-tl-event-body" style="margin-bottom: 16px;">Upload two files and the Gem extracts all the context automatically.</p>
+
+                                <!-- File card: SPSA -->
+                                <div class="gem-context-file gem-context-file--1">
+                                    <div class="gem-context-file-icon">
+                                        <i data-lucide="file-text" style="width: 16px; height: 16px;"></i>
+                                    </div>
+                                    <div class="gem-context-file-info">
+                                        <span class="gem-context-file-name">Your School's SPSA</span>
+                                        <span class="gem-context-file-desc">Who you are &mdash; school, students, goals, needs, strategies</span>
+                                    </div>
+                                </div>
+
+                                <!-- File card: Self-Reflection Tool -->
+                                <div class="gem-context-file gem-context-file--2">
+                                    <div class="gem-context-file-icon">
+                                        <i data-lucide="file-spreadsheet" style="width: 16px; height: 16px;"></i>
+                                    </div>
+                                    <div class="gem-context-file-info">
+                                        <span class="gem-context-file-name">VVUSD SPSA Self-Reflection Tool</span>
+                                        <span class="gem-context-file-desc">What to look for &mdash; rubric criteria, compliance standards</span>
+                                    </div>
+                                </div>
+
+                                <!-- Merge indicator -->
+                                <div class="gem-context-merge">
+                                    <div class="gem-context-merge-line"></div>
+                                    <div class="gem-context-merge-badge">
+                                        <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+                                    </div>
+                                    <div class="gem-context-merge-line"></div>
+                                </div>
+
+                                <!-- Result -->
+                                <div class="gem-context-result">
+                                    <i data-lucide="check-circle" style="width: 16px; height: 16px;"></i>
+                                    <span>Full context &mdash; no manual entry needed</span>
+                                </div>
                             </div>
                             <div class="glass-card gem-tl-event gem-tl-event--purple" data-gem-animate>
                                 <div class="gem-tl-event-header">
-                                    <div class="gem-tl-event-icon gem-tl-event-icon--purple"><i data-lucide="check-circle" style="width: 22px; height: 22px;"></i></div>
-                                    <div class="gem-tl-event-title">Why This Matters</div>
+                                    <div class="gem-tl-event-icon gem-tl-event-icon--purple"><i data-lucide="link" style="width: 22px; height: 22px;"></i></div>
+                                    <div class="gem-tl-event-title">Tell the Gem About Its Files</div>
                                 </div>
-                                <ul class="gem-tl-tip-list" style="--tip-color: var(--purple-400);">
-                                    <li>The Gem already knows your school because it has your plan</li>
-                                    <li>It can reference specific goals, metrics, and student groups from the SPSA</li>
-                                    <li>The rubric provides the "Look Fors" it checks your plan against</li>
-                                    <li>This is the power of a knowledge base &mdash; context without extra work</li>
-                                </ul>
+                                <p class="gem-tl-event-body">Uploading files isn't enough &mdash; you also need to <strong>reference them in the instructions</strong>. If you don't, the Gem may not know the files are there or how to use them. Think of it like handing someone a binder without explaining what's inside.</p>
+                                <p class="gem-tl-event-body" style="margin-top: 12px;">In this Gem's instructions, we tell it exactly what each file is and what to do with them:</p>
+                                <div class="gem-tl-example-block" style="border-left-color: var(--purple-500);">Review my SPSA content <strong>(in your files)</strong> against the "VVUSD SPSA Self-Reflection Tool" <strong>(also in your files)</strong>.</div>
+                                <p class="gem-tl-event-body" style="margin-top: 12px;">We also name each document and describe its contents:</p>
+                                <div class="gem-tl-example-block" style="border-left-color: var(--purple-500);"><strong>Source Documents</strong><br>1. School's SPSA &mdash; Single Plan for Student Achievement with goals, needs assessment, strategies, and metrics<br>2. VVUSD SPSA Self-Reflection Tool &mdash; District rubric with "Look Fors" for each SPSA section</div>
+                                <p class="gem-tl-event-body" style="margin-top: 12px; color: var(--text-muted); font-size: 0.85rem;">This is a best practice for any Gem you build &mdash; always tell the Gem what files it has, what they contain, and how to use them.</p>
                             </div>
                             <!-- Builder: Context info (automatic) -->
                             <div class="gem-builder-slot" data-builder="context"></div>

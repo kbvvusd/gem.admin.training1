@@ -8,8 +8,8 @@
     
     /* Text */
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --text-muted: rgba(255, 255, 255, 0.4);
+    --text-secondary: rgba(255, 255, 255, 0.85);
+    --text-muted: rgba(255, 255, 255, 0.6);
     --text-disabled: rgba(255, 255, 255, 0.2);
     
     /* Borders */
@@ -678,7 +678,7 @@ body.light-mode [style*="background: var(--"] [style*="color: white"] {
 }
 
 .mock-gemini-settings-btn {
-    color: #888;
+    color: #b0b0b0;
 }
 
 .mock-gemini-settings-btn span {
@@ -686,7 +686,7 @@ body.light-mode [style*="background: var(--"] [style*="color: white"] {
 }
 
 .mock-gemini-label {
-    color: #888;
+    color: #b0b0b0;
 }
 
 .mock-gemini-prompt {
@@ -699,11 +699,11 @@ body.light-mode [style*="background: var(--"] [style*="color: white"] {
 }
 
 .mock-gemini-input::placeholder {
-    color: #888;
+    color: #b0b0b0;
 }
 
 .mock-gemini-icon-btn {
-    color: #888;
+    color: #b0b0b0;
     border: none !important;
     outline: none;
     background: transparent;
@@ -711,7 +711,7 @@ body.light-mode [style*="background: var(--"] [style*="color: white"] {
 
 .mock-gemini-send-btn {
     background: #313235;
-    color: #888;
+    color: #b0b0b0;
 }
 
 .mock-gemini-chip {
